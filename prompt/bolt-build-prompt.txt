@@ -1,0 +1,43 @@
+Beyond the Listing — Pixel-Perfect Landing Page Build
+
+Objective
+Recreate the supplied Beyond the Listing landing page as closely as possible in Bolt. This is not a redesign task. This is a faithful implementation task.
+
+Source of truth
+Use the provided handoff package as the source of truth, in this order of priority:
+1. /mockup/full-page-mockup.png
+2. /sections/*.png
+3. /assets/*.png
+4. /code/index-reference.html
+5. /code/styles-reference.css
+6. /copy/page-copy.txt
+
+Build requirements
+- Reproduce the layout, spacing, hierarchy, and styling as closely as possible.
+- Do not simplify the page.
+- Do not reinterpret the visual design.
+- Do not change the copy unless needed for small text-quality cleanup.
+- Preserve the dark luxury aesthetic: black/charcoal backgrounds, warm gold accents, soft cream content areas, serif headlines, clean sans-serif body copy.
+- Preserve the section order exactly.
+- Preserve the proportions of the hero, preview card, host strip, benefits grid, deliverables section, process/audience section, and testimonial/contact section.
+- Use the provided image assets, especially Malinda, instead of replacing them with generic placeholders.
+- Make the episode preview, show video, social clips, and drone tiles feel like polished media cards.
+- Keep buttons, cards, radii, borders, and shadows visually consistent with the mockup.
+- Make the page responsive, but maintain strong fidelity to the desktop composition.
+
+Implementation notes
+- The hero should feel cinematic and premium.
+- Malinda should appear as a real host and brand differentiator, not as a generic stock model.
+- The contact form should visually match the mockup and should be production-ready.
+- If any text appears fuzzy or ambiguous in the screenshot, use the wording from page-copy.txt.
+- If any spacing is unclear from the full-page mockup, use the relevant section crop.
+- If any image placement is unclear, use the section crop and the individual asset crop together.
+
+Strict instruction
+Treat this as a reproduction assignment, not a creative interpretation assignment.
+
+Deliverables in Bolt
+- A finished landing page that closely matches the supplied mockup
+- Properly structured sections and clean code
+- Responsive behavior for desktop, tablet, and mobile
+- A short markdown build report saved in /reports with date + timestamp at the top
