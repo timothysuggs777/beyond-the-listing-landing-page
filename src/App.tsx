@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabase';
 import logoImg from '../public/assets/beyond_the_listing_logo_design.png';
-import heroThumbImg from '../public/assets/hero-episode-preview-virginia.png';
 
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
+const HERO_THUMB = `${CDN}/hero-episode-preview-virginia.png?v=5`;
+const CONTACT_PORTRAIT = `${CDN}/contact-section-malinda-warm-portrait.png?v=5`;
 
 interface FormState {
   name: string;
@@ -101,7 +102,7 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src={heroThumbImg} alt="Episode preview — Inside a Timeless Estate in Virginia" />
+                <img src={HERO_THUMB} alt="Episode preview — Inside a Timeless Estate in Virginia" />
                 <span className="episode-label">Episode Preview</span>
                 <span className="episode-runtime">5:07</span>
               </div>
@@ -306,7 +307,7 @@ export default function App() {
             </div>
 
             <div className="bottom-portrait">
-              <img src={`${CDN}/malinda-bottom-portrait.png`} alt="Malinda portrait" />
+              <img src={CONTACT_PORTRAIT} alt="Malinda — Beyond the Listing host" />
             </div>
 
             {status === 'success' ? (

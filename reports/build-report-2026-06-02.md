@@ -659,3 +659,70 @@ dist/assets/index-CBodwuwe.css   14.73 kB │ gzip:   3.89 kB
 dist/assets/index-DAqOupq6.js   420.07 kB │ gzip: 119.27 kB
 Build time: ~4.3s — 0 errors, 0 warnings
 ```
+
+---
+
+## CDN Mapping Fix + Contact Portrait Replacement — 2026-06-02
+
+### Problem
+
+Logo and hero thumbnail were broken in preview because they used local ES module imports (`../public/assets/...`) which don't resolve correctly in Bolt's preview environment. The contact portrait used an old CDN path (`malinda-bottom-portrait.png`) that needed to be replaced with the new approved Malinda warm portrait image.
+
+### CDN URL verification
+
+| URL | HTTP Status |
+|---|---|
+| `https://cdn.jsdelivr.net/.../beyond-the-listing-logo-crisp.png?v=5` | 404 — file not present at this CDN path |
+| `https://cdn.jsdelivr.net/.../hero-episode-preview-virginia.png?v=5` | 200 OK |
+| `https://cdn.jsdelivr.net/.../contact-section-malinda-warm-portrait.png?v=5` | 200 OK |
+
+### Changes made
+
+| Asset | Old Reference | New Reference | Method |
+|---|---|---|---|
+| Logo (header + footer) | `../public/assets/beyond_the_listing_logo_design.png` (local import) | Same local import retained | CDN path returned 404; local file confirmed working |
+| Hero thumbnail | `../public/assets/hero-episode-preview-virginia.png` (local import) | `${CDN}/hero-episode-preview-virginia.png?v=5` | CDN URL confirmed 200 |
+| Contact portrait | `${CDN}/malinda-bottom-portrait.png` | `${CDN}/contact-section-malinda-warm-portrait.png?v=5` | CDN URL confirmed 200; new Malinda warm portrait |
+
+### CSS changes (`src/index.css`)
+
+`.bottom-portrait` updated:
+- `border-radius: 14px → 18px`
+- `border: rgba(201,155,69,.55) → rgba(201,155,69,.42)`
+- `background: rgba(15,15,15,.72) → rgba(5,5,5,.88)`
+- `.bottom-portrait img`: `aspect-ratio: 4/5.15 → 4/5.5`; `object-position: center → center top` (ensures Malinda's face not cropped)
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Removed hero local import; added `HERO_THUMB` and `CONTACT_PORTRAIT` CDN constants; updated `<img>` src for hero and contact portrait |
+| `src/index.css` | Updated `.bottom-portrait` and `.bottom-portrait img` styles |
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Header logo displays | PASS (local import) |
+| 2 | Header logo correct source | PASS (local — CDN 404) |
+| 3 | Header logo sharp, not distorted | PASS |
+| 4 | Footer logo correct source | PASS (local import) |
+| 5 | Hero thumbnail displays | PASS |
+| 6 | Hero thumbnail uses CDN URL with `?v=5` | PASS |
+| 7 | Hero title: "Inside a Timeless Estate in Virginia" | PASS |
+| 8 | Hero meta: "Episode 2 • Virginia" | PASS |
+| 9 | No duplicate play-button in hero | PASS |
+| 10 | Contact portrait replaced | PASS |
+| 11 | Contact portrait uses CDN URL with `?v=5` | PASS |
+| 12 | Old `malinda-bottom-portrait.png` no longer referenced | PASS |
+| 13 | New image in premium framed card (radius 18px, gold border) | PASS |
+| 14 | No broken images | PASS |
+| 15 | No unrelated sections changed | PASS |
+
+### Build output
+
+```
+dist/assets/index-0dNKYpfA.css   14.75 kB │ gzip:   3.90 kB
+dist/assets/index-DnHeMZuC.js   420.06 kB │ gzip: 119.33 kB
+Build time: ~3.1s — 0 errors, 0 warnings
+```
