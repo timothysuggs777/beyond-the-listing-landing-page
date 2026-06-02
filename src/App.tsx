@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabase';
+import logoImg from '../public/assets/beyond_the_listing_logo_design.png';
+import heroThumbImg from '../public/assets/hero-episode-preview-virginia.png';
 
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
 
@@ -48,7 +50,7 @@ export default function App() {
       <header className="site-header">
         <div className="site-shell header-inner">
           <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
-            <img src="/assets/beyond_the_listing_logo_design.png" alt="Beyond the Listing" />
+            <img src={logoImg} alt="Beyond the Listing" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How It Works</a>
@@ -99,7 +101,7 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src="/assets/hero-episode-preview-virginia.png" alt="Episode preview — Inside a Timeless Estate in Virginia" />
+                <img src={heroThumbImg} alt="Episode preview — Inside a Timeless Estate in Virginia" />
                 <span className="episode-label">Episode Preview</span>
                 <span className="episode-runtime">5:07</span>
               </div>
@@ -341,7 +343,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <img src="/assets/beyond_the_listing_logo_design.png" alt="Beyond the Listing" />
+          <img src={logoImg} alt="Beyond the Listing" />
           <p>A hosted home-story show for standout properties.</p>
           <nav>
             <a href="#how-it-works">How It Works</a>
