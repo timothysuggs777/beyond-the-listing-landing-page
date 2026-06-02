@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CDN } from '../lib/cdn';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -15,7 +16,7 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.navRow}`}>
         <a href="#hero" className={styles.brand}>
-          <img src="/assets/logo-beyond-the-listing.png" alt="Beyond the Listing" />
+          <img src={CDN.logo} alt="Beyond the Listing" />
         </a>
 
         <nav className={`${styles.topNav} ${menuOpen ? styles.open : ''}`}>

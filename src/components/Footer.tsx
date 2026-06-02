@@ -1,3 +1,4 @@
+import { CDN } from '../lib/cdn';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -5,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.footerInner}`}>
         <a href="#hero" className={styles.brand}>
-          <img src="/assets/logo-beyond-the-listing.png" alt="Beyond the Listing" />
+          <img src={CDN.logo} alt="Beyond the Listing" />
         </a>
         <p className={styles.tagline}>A hosted home-story show for standout properties.</p>
         <nav className={styles.footerNav}>

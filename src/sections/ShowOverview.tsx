@@ -1,3 +1,4 @@
+import { CDN } from '../lib/cdn';
 import styles from './ShowOverview.module.css';
 
 export default function ShowOverview() {
@@ -31,7 +32,7 @@ export default function ShowOverview() {
         {/* Col 2: video card */}
         <div className={styles.videoCard}>
           <div className={styles.videoThumb}>
-            <img src="/assets/show-explainer-video.png" alt="Malinda hosting the show" />
+            <img src={CDN.showExplainer} alt="Malinda hosting the show" />
             <div className={styles.videoPlayOverlay}>
               <div className={styles.videoPlayBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a">

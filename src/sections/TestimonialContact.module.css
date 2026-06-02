@@ -1,8 +1,5 @@
 .testimonialContact {
   padding: 64px 0 80px;
-  background:
-    linear-gradient(180deg, rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.92)),
-    url('/sections/08-testimonial-cta.png') center / cover no-repeat;
 }
 
 .grid {

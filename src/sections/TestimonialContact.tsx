@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { CDN } from '../lib/cdn';
 import styles from './TestimonialContact.module.css';
 
 interface FormData {
@@ -44,7 +45,14 @@ export default function TestimonialContact() {
   };
 
   return (
-    <section className={`section-dark ${styles.testimonialContact}`}>
+    <section
+      className={`section-dark ${styles.testimonialContact}`}
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.96), rgba(10,10,10,0.92)), url('${CDN.testimonialBg}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <div className={`container ${styles.grid}`}>
 
         {/* Testimonial copy */}
@@ -56,7 +64,7 @@ export default function TestimonialContact() {
           </blockquote>
           <div className={styles.attribution}>
             <img
-              src="/assets/testimonial-card.png"
+              src={CDN.testimonialCard}
               alt="Michael Reynolds"
               className={styles.attributionAvatar}
             />
@@ -74,7 +82,7 @@ export default function TestimonialContact() {
         {/* Malinda portrait */}
         <div className={styles.portraitPanel}>
           <img
-            src="/assets/malinda-bottom-portrait.png"
+            src={CDN.malindaPortrait}
             alt="Malinda — Beyond the Listing host"
           />
         </div>
@@ -89,74 +97,26 @@ export default function TestimonialContact() {
               </svg>
               <h3>Request Received!</h3>
               <p>We&rsquo;ll be in touch shortly to discuss your listing opportunity.</p>
-              <button
-                className="btn btn-gold"
-                onClick={() => setStatus('idle')}
-              >
+              <button className="btn btn-gold" onClick={() => setStatus('idle')}>
                 Submit Another
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               <div className={styles.formGrid}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  name="brokerage"
-                  placeholder="Brokerage"
-                  value={form.brokerage}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  name="property_address"
-                  placeholder="Property Address (or Area)"
-                  value={form.property_address}
-                  onChange={handleChange}
-                  className={styles.fullWidth}
-                />
-                <textarea
-                  name="message"
-                  placeholder="Tell us about the property"
-                  value={form.message}
-                  onChange={handleChange}
-                  className={styles.fullWidth}
-                />
+                <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+                <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+                <input type="tel" name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
+                <input type="text" name="brokerage" placeholder="Brokerage" value={form.brokerage} onChange={handleChange} />
+                <input type="text" name="property_address" placeholder="Property Address (or Area)" value={form.property_address} onChange={handleChange} className={styles.fullWidth} />
+                <textarea name="message" placeholder="Tell us about the property" value={form.message} onChange={handleChange} className={styles.fullWidth} />
               </div>
 
               {status === 'error' && (
-                <p className={styles.errorMsg}>
-                  Something went wrong. Please try again.
-                </p>
+                <p className={styles.errorMsg}>Something went wrong. Please try again.</p>
               )}
 
-              <button
-                type="submit"
-                className={`btn btn-gold btn-block ${styles.submitBtn}`}
-                disabled={status === 'submitting'}
-              >
+              <button type="submit" className={`btn btn-gold btn-block ${styles.submitBtn}`} disabled={status === 'submitting'}>
                 {status === 'submitting' ? 'Sending…' : 'Request More Info'}
               </button>
 

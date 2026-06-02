@@ -1,9 +1,24 @@
+import { CDN } from '../lib/cdn';
 import styles from './Hero.module.css';
 
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
-      <div className={styles.heroBg} />
+      <div
+        className={styles.heroBg}
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              92deg,
+              rgba(10,10,10,0.94) 0%,
+              rgba(10,10,10,0.80) 40%,
+              rgba(10,10,10,0.38) 68%,
+              rgba(10,10,10,0.62) 100%
+            ),
+            url('${CDN.episodePreview}')
+          `,
+        }}
+      />
 
       <div className={`container ${styles.heroGrid}`}>
         {/* Left: copy */}
@@ -61,7 +76,7 @@ export default function Hero() {
         {/* Right: episode preview card */}
         <aside id="preview" className={`card-dark ${styles.episodePreview}`}>
           <div className={styles.previewThumb}>
-            <img src="/assets/episode-preview.png" alt="Episode preview — Inside a Timeless Estate in Scottsdale" />
+            <img src={CDN.episodePreview} alt="Episode preview — Inside a Timeless Estate in Scottsdale" />
             <div className={styles.playOverlay}>
               <div className={styles.playBtn}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white">

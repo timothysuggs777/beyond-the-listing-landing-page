@@ -1,3 +1,4 @@
+import { CDN } from '../lib/cdn';
 import styles from './Deliverables.module.css';
 
 export default function Deliverables() {
@@ -15,10 +16,7 @@ export default function Deliverables() {
           <div className={styles.deliverableItem}>
             <h3>Full YouTube Episode</h3>
             <div className={styles.mediaCard}>
-              <img
-                src="/assets/youtube-episode-thumbnail.png"
-                alt="Full YouTube Episode thumbnail"
-              />
+              <img src={CDN.youtubeThumbnail} alt="Full YouTube Episode thumbnail" />
             </div>
           </div>
 
@@ -26,8 +24,8 @@ export default function Deliverables() {
           <div className={styles.deliverableItem}>
             <h3>Social Clips &amp; Reels</h3>
             <div className={`${styles.mediaCard} ${styles.reelPair}`}>
-              <img src="/assets/reels-thumbnail-1.png" alt="Social reel clip 1" />
-              <img src="/assets/reels-thumbnail-2.png" alt="Social reel clip 2" />
+              <img src={CDN.reelThumb1} alt="Social reel clip 1" />
+              <img src={CDN.reelThumb2} alt="Social reel clip 2" />
             </div>
           </div>
 
@@ -35,10 +33,7 @@ export default function Deliverables() {
           <div className={styles.deliverableItem}>
             <h3>Drone &amp; B-Roll Footage</h3>
             <div className={styles.mediaCard}>
-              <img
-                src="/assets/drone-thumbnail.png"
-                alt="Drone and B-Roll footage"
-              />
+              <img src={CDN.droneThumbnail} alt="Drone and B-Roll footage" />
             </div>
           </div>
 
@@ -46,10 +41,7 @@ export default function Deliverables() {
           <div className={styles.deliverableItem}>
             <h3>Branded CTA &amp; Contact Assets</h3>
             <div className={styles.mediaCard}>
-              <img
-                src="/assets/branded-cta-card.png"
-                alt="Branded CTA and contact assets"
-              />
+              <img src={CDN.brandedCta} alt="Branded CTA and contact assets" />
             </div>
           </div>
         </div>

@@ -150,6 +150,71 @@ All 13 image references resolve to files present in `public/`. Build passes clea
 
 ---
 
+## CDN Image Fix — 2026-06-02
+
+### Problem
+
+Direct URL tests in Bolt's preview confirmed that while `/assets/logo-beyond-the-listing.png` loaded correctly, most other images — `/assets/episode-preview.png`, `/assets/malinda-host-cutout.png`, etc. — returned 404. This proved that only a subset of files in `public/assets/` were actually included in the deployed public bundle. The remaining binaries were missing from Bolt's built output.
+
+### Solution
+
+Replaced all local public-path image references (`/assets/...`, `/sections/...`) with direct jsDelivr CDN URLs pointing to the committed image files in the GitHub repository.
+
+**CDN base:** `https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main`
+
+### New file: `src/lib/cdn.ts`
+
+A single constants module centralises all CDN URLs. Every component imports from here — no CDN strings are scattered inline.
+
+```ts
+const BASE = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main';
+export const CDN = {
+  logo, episodePreview, malindaCutout, malindaPortrait, showExplainer,
+  youtubeThumbnail, reelThumb1, reelThumb2, droneThumbnail, brandedCta,
+  testimonialCard, mockupBg, testimonialBg
+}
+```
+
+### Files updated
+
+| File | Change |
+|---|---|
+| `src/lib/cdn.ts` | **Created** — CDN constants module |
+| `src/components/Header.tsx` | Logo → `CDN.logo` |
+| `src/components/Footer.tsx` | Logo → `CDN.logo` |
+| `src/sections/Hero.tsx` | Episode preview img + hero bg → `CDN.episodePreview` (inline style) |
+| `src/sections/Hero.module.css` | Removed `url('/assets/...')` CSS background — now inline style |
+| `src/sections/HostStrip.tsx` | Malinda cutout → `CDN.malindaCutout` |
+| `src/sections/ShowOverview.tsx` | Show explainer → `CDN.showExplainer` |
+| `src/sections/Deliverables.tsx` | All 4 deliverable images → CDN constants |
+| `src/sections/TestimonialContact.tsx` | Testimonial card, Malinda portrait, bg → CDN constants (bg via inline style) |
+| `src/sections/TestimonialContact.module.css` | Removed `url('/sections/...')` CSS background — now inline style |
+
+### Why CSS backgrounds moved to inline styles
+
+CSS Modules cannot reference JavaScript variables. The two sections that had `background: url('/...')` in CSS (`Hero.module.css`, `TestimonialContact.module.css`) had those rules removed and replaced with `style={{ backgroundImage: \`url('${CDN.xxx}')\` }}` in the JSX, which correctly resolves the CDN URL at runtime.
+
+### All image references now resolved via CDN
+
+| Image | CDN URL |
+|---|---|
+| Logo | `.../assets/logo-beyond-the-listing.png` |
+| Episode preview | `.../assets/episode-preview.png` |
+| Malinda host cutout | `.../assets/malinda-host-cutout.png` |
+| Malinda bottom portrait | `.../assets/malinda-bottom-portrait.png` |
+| Show explainer | `.../assets/show-explainer-video.png` |
+| YouTube thumbnail | `.../assets/youtube-episode-thumbnail.png` |
+| Reel 1 | `.../assets/reels-thumbnail-1.png` |
+| Reel 2 | `.../assets/reels-thumbnail-2.png` |
+| Drone thumbnail | `.../assets/drone-thumbnail.png` |
+| Branded CTA | `.../assets/branded-cta-card.png` |
+| Testimonial avatar | `.../assets/testimonial-card.png` |
+| Testimonial section bg | `.../sections/08-testimonial-cta.png` |
+
+Build passes clean: 0 errors, 0 warnings.
+
+---
+
 ## Build Output
 
 ```

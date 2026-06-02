@@ -1,3 +1,4 @@
+import { CDN } from '../lib/cdn';
 import styles from './HostStrip.module.css';
 
 export default function HostStrip() {
@@ -5,7 +6,7 @@ export default function HostStrip() {
     <section className={`section-dark ${styles.hostStrip}`}>
       <div className={`container ${styles.stripCard}`}>
         <img
-          src="/assets/malinda-host-cutout.png"
+          src={CDN.malindaCutout}
           alt="Malinda — Host of Beyond the Listing"
           className={styles.hostCutout}
         />
