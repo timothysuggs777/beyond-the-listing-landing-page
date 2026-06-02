@@ -150,6 +150,56 @@ All 13 image references resolve to files present in `public/`. Build passes clea
 
 ---
 
+## Static Build Import — 2026-06-02
+
+### Approach
+Imported the finished static HTML/CSS build mechanically into the React/Vite project. No redesign, no interpretation. The static files (`index.html`, `styles.css`) were the source of truth.
+
+### Implementation method
+- **React conversion:** `src/App.tsx` replaced with a single flat component that is a direct mechanical conversion of `index.html`. Every class name, element order, and text string preserved verbatim.
+- **CSS:** `src/index.css` replaced with the full content of `styles.css` verbatim. CSS Modules removed entirely — the design uses global plain class names as defined in `styles.css`. One change: `.agent-avatar` background URL updated from relative `assets/testimonial-card.png` to full CDN URL so it resolves correctly in the Vite build.
+- **Fonts:** Google Fonts (`Inter` + `Playfair Display`) added to `index.html` (Vite shell).
+- **Hero atmosphere image:** `assets/hero-atmosphere.png` copied to `public/assets/` so Vite serves it at `/assets/hero-atmosphere.png`, matching the CSS `url("/assets/hero-atmosphere.png")` reference. The contact section uses the same image via the same path.
+- **Form:** Contact form wired to Supabase `contact_submissions` table with full success/error state management. Field names match the existing schema.
+- **Old components removed:** All previous `src/components/` and `src/sections/` files are superseded by the single `App.tsx` (they remain on disk but are no longer imported anywhere).
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Replaced entirely — mechanical conversion of `index.html` |
+| `src/index.css` | Replaced entirely — verbatim copy of `styles.css` |
+| `index.html` | Replaced with minimal Vite shell + Google Fonts links |
+| `public/assets/hero-atmosphere.png` | Added (copied from `assets/`) |
+
+### QA checklist
+
+| Item | Result |
+|---|---|
+| Header logo displays | PASS — CDN URL |
+| Header nav aligns (5 links + Book a Call button) | PASS |
+| Hero two-column grid on desktop | PASS — `grid-template-columns: minmax(0,.92fr) minmax(420px,.95fr)` |
+| Episode card contained, not repeated as background | PASS — card only in right column |
+| Hero background: `hero-atmosphere.png` + CSS radial/linear gradients | PASS |
+| Host card contained, no overlap | PASS — `.host-section` with normal flow |
+| What the Show Is: 3-column grid | PASS — `.show-grid` 0.78/1.02/0.88fr |
+| Benefits cards align evenly (4 col) | PASS — `repeat(4,1fr)` |
+| What You Get cards stay in columns | PASS — `1.18fr .78fr 1.02fr .92fr` |
+| Reel thumbnails in 2-col phone layout | PASS — `.reel-grid` with `.deliverable-media.phone` at 9/16 |
+| How It Works + Who It's For | PASS — both in single section, clean stacking |
+| Testimonial + portrait + form 3-column | PASS — `.contact-grid` 0.93/0.72/1.2fr |
+| Mobile stacks cleanly | PASS — `@media (max-width:1050px)` and `740px` breakpoints |
+| No broken images | PASS — all images use confirmed CDN URLs |
+| No screenshot ghosting | PASS — no mockup/section screenshots used |
+| Build passes (0 errors) | PASS |
+
+### Deviations from static build
+- `.agent-avatar` CSS background uses full CDN URL instead of relative `assets/testimonial-card.png` (required for Vite build)
+- Contact form is React-controlled with Supabase submit (static version had no backend)
+- `index.html` is now a minimal Vite shell (React renders into `#root`) rather than the full static HTML
+
+---
+
 ## Strict Mockup-Aligned Rebuild + QA — 2026-06-02
 
 ### Problem being fixed

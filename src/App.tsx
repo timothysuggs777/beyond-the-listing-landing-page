@@ -1,27 +1,357 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Hero from './sections/Hero';
-import HostStrip from './sections/HostStrip';
-import ShowOverview from './sections/ShowOverview';
-import Benefits from './sections/Benefits';
-import Deliverables from './sections/Deliverables';
-import ProcessAudience from './sections/ProcessAudience';
-import TestimonialContact from './sections/TestimonialContact';
+import { useState } from 'react';
+import { supabase } from './lib/supabase';
+
+const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
+
+interface FormState {
+  name: string;
+  email: string;
+  phone: string;
+  brokerage: string;
+  property: string;
+  message: string;
+}
+
+const emptyForm: FormState = { name: '', email: '', phone: '', brokerage: '', property: '', message: '' };
 
 export default function App() {
+  const [form, setForm] = useState<FormState>(emptyForm);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email) return;
+    setStatus('submitting');
+    const { error } = await supabase.from('contact_submissions').insert([{
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      brokerage: form.brokerage,
+      property_address: form.property,
+      message: form.message,
+    }]);
+    if (error) {
+      setStatus('error');
+    } else {
+      setStatus('success');
+      setForm(emptyForm);
+    }
+  };
+
   return (
     <>
-      <Header />
-      <main>
-        <Hero />
-        <HostStrip />
-        <ShowOverview />
-        <Benefits />
-        <Deliverables />
-        <ProcessAudience />
-        <TestimonialContact />
+      {/* ── HEADER ── */}
+      <header className="site-header">
+        <div className="site-shell header-inner">
+          <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
+            <img src={`${CDN}/logo-beyond-the-listing.png`} alt="Beyond the Listing" />
+          </a>
+          <nav className="desktop-nav" aria-label="Main navigation">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#why-agents">Why Agents Love It</a>
+            <a href="#episode-format">Episode Format</a>
+            <a href="#contact">Contact</a>
+            <a className="nav-button" href="#contact">Book a Call</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        {/* ── HERO ── */}
+        <section className="hero section-dark">
+          <div className="hero-bg" />
+          <div className="hero-overlay" />
+          <div className="site-shell hero-grid">
+            <div className="hero-copy">
+              <p className="eyebrow">A YouTube series for outstanding listings</p>
+              <h1>Turn Your Listing Into a Show Worth Watching.</h1>
+              <div className="gold-line" />
+              <p className="hero-lead">
+                Beyond the Listing is a hosted YouTube home-story show that helps agents and brokers
+                showcase standout properties with high-end videography, cinematic storytelling, and
+                strategic outreach.
+              </p>
+              <div className="button-row">
+                <a className="btn btn-gold" href="#contact">Request Info</a>
+                <a className="btn btn-dark" href="#episode-format">
+                  <span className="play-dot">▶</span> See the Concept
+                </a>
+              </div>
+              <div className="hero-points">
+                <div className="hero-point">
+                  <span>◷</span>
+                  <p>5-Minute<br />YouTube Episodes</p>
+                </div>
+                <div className="hero-point">
+                  <span>▣</span>
+                  <p>Cinematic Storytelling<br />That Connects</p>
+                </div>
+                <div className="hero-point">
+                  <span>◎</span>
+                  <p>Designed for<br />Outreach &amp; SEO</p>
+                </div>
+              </div>
+            </div>
+
+            <article className="episode-card">
+              <div className="episode-media">
+                <img src={`${CDN}/episode-preview.png`} alt="Episode preview featuring Malinda and an agent" />
+                <span className="episode-label">Episode Preview</span>
+                <span className="episode-runtime">5:07</span>
+                <button className="big-play" type="button">▶</button>
+              </div>
+              <div className="episode-info">
+                <div>
+                  <h2>Inside a Timeless Estate in Scottsdale</h2>
+                  <p>Episode 2 <span>•</span> Scottsdale, Arizona</p>
+                </div>
+                <div className="youtube-badge">YouTube</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* ── HOST STRIP ── */}
+        <section className="host-section section-dark">
+          <div className="site-shell">
+            <div className="host-card">
+              <div className="host-image">
+                <img src={`${CDN}/malinda-host-cutout.png`} alt="Malinda, host of Beyond the Listing" />
+              </div>
+              <div className="host-copy">
+                <p className="eyebrow">Meet your host</p>
+                <h2>Hosted by Malinda</h2>
+                <p>
+                  An advertising and real estate expert with a passion for helping agents elevate
+                  exceptional properties through cinematic video and powerful outreach.
+                </p>
+              </div>
+              <div className="host-credentials">
+                <div>
+                  <span>♙</span>
+                  <p>Real Estate Expert &amp; Storyteller</p>
+                </div>
+                <div>
+                  <span>▣</span>
+                  <p>Cinematic Eye for Detail</p>
+                </div>
+                <div>
+                  <span>♡</span>
+                  <p>Your Partner in Showcasing Listings</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── WHAT THE SHOW IS ── */}
+        <section className="show-section section-cream">
+          <div className="site-shell show-grid">
+            <div className="section-copy">
+              <h2>What the Show Is</h2>
+              <div className="gold-line" />
+              <p>
+                Beyond the Listing is a hosted YouTube series led by Malinda that tells the story
+                behind exceptional properties and the communities they&rsquo;re in.
+              </p>
+              <p>
+                Each episode blends local insight, cinematic visuals, and agent features to create a
+                show worth watching—and sharing.
+              </p>
+            </div>
+            <div className="show-video media-frame">
+              <img src={`${CDN}/show-explainer-video.png`} alt="Malinda hosting the show" />
+              <button className="big-play light" type="button">▶</button>
+            </div>
+            <aside id="episode-format" className="format-card">
+              <h3>Episode Format</h3>
+              <ol>
+                <li><span>1</span> Intro</li>
+                <li><span>2</span> Stats / Region / County / Town context</li>
+                <li><span>3</span> Cinematic tour + agent interview</li>
+                <li><span>4</span> Interior walkthrough</li>
+                <li><span>5</span> Lifestyle + area highlights</li>
+                <li><span>6</span> Drone overview</li>
+                <li><span>7</span> Agent preview</li>
+                <li><span>8</span> Outro + contact</li>
+              </ol>
+            </aside>
+          </div>
+        </section>
+
+        {/* ── BENEFITS ── */}
+        <section id="why-agents" className="benefits-section section-cream">
+          <div className="site-shell">
+            <h2 className="section-title">Why Agents and Brokers Use It</h2>
+            <div className="benefit-grid">
+              <article className="benefit-card">
+                <div className="benefit-icon">☆</div>
+                <h3>Win More Listings</h3>
+                <p>Stand out with a presentation that positions you as the go-to expert.</p>
+              </article>
+              <article className="benefit-card">
+                <div className="benefit-icon">♙</div>
+                <h3>Impress Sellers</h3>
+                <p>Give your sellers a premium, shareable experience they will remember.</p>
+              </article>
+              <article className="benefit-card">
+                <div className="benefit-icon">▣</div>
+                <h3>Turn One Show Into Weeks of Content</h3>
+                <p>Get a full content package that fuels your outreach, social, and marketing.</p>
+              </article>
+              <article className="benefit-card">
+                <div className="benefit-icon">⌁</div>
+                <h3>Elevate Your Brand</h3>
+                <p>Build credibility and authority with high-production video storytelling.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* ── DELIVERABLES ── */}
+        <section className="deliverables-section section-dark">
+          <div className="site-shell">
+            <h2 className="section-title dark">What You Get</h2>
+            <div className="deliverable-grid">
+              <article className="deliverable">
+                <h3>Full YouTube Episode</h3>
+                <div className="deliverable-media wide">
+                  <img src={`${CDN}/youtube-episode-thumbnail.png`} alt="Full YouTube episode thumbnail" />
+                </div>
+              </article>
+              <article className="deliverable">
+                <h3>Social Clips &amp; Reels</h3>
+                <div className="reel-grid">
+                  <div className="deliverable-media phone">
+                    <img src={`${CDN}/reels-thumbnail-1.png`} alt="Social reel thumbnail one" />
+                  </div>
+                  <div className="deliverable-media phone">
+                    <img src={`${CDN}/reels-thumbnail-2.png`} alt="Social reel thumbnail two" />
+                  </div>
+                </div>
+              </article>
+              <article className="deliverable">
+                <h3>Drone &amp; B-Roll Footage</h3>
+                <div className="deliverable-media wide">
+                  <img src={`${CDN}/drone-thumbnail.png`} alt="Drone footage thumbnail" />
+                </div>
+              </article>
+              <article className="deliverable">
+                <h3>Branded CTA &amp; Contact Assets</h3>
+                <div className="deliverable-media cta">
+                  <img src={`${CDN}/branded-cta-card.png`} alt="Branded call-to-action asset" />
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* ── HOW IT WORKS + WHO IT'S FOR ── */}
+        <section id="how-it-works" className="process-section section-cream">
+          <div className="site-shell">
+            <h2 className="section-title">How It Works</h2>
+            <div className="process-grid">
+              <div className="process-step">
+                <span>1</span><i>▣</i>
+                <p>We coordinate the property, schedule, and logistics.</p>
+              </div>
+              <div className="process-step">
+                <span>2</span><i>▻</i>
+                <p>We film a cinematic tour and interview with your agent.</p>
+              </div>
+              <div className="process-step">
+                <span>3</span><i>◉</i>
+                <p>We produce the episode and content package.</p>
+              </div>
+              <div className="process-step">
+                <span>4</span><i>⇧</i>
+                <p>You receive a final release and assets to share everywhere.</p>
+              </div>
+            </div>
+            <h2 className="section-title audience-title">Who It&rsquo;s For</h2>
+            <div className="audience-grid">
+              <div><span>♙</span><p>Top Producing Agents</p></div>
+              <div><span>⌂</span><p>Boutique Brokerages</p></div>
+              <div><span>♢</span><p>Luxury &amp; Exclusive Homes</p></div>
+              <div><span>♧</span><p>Teams &amp; Agent Marketing Programs</p></div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CONTACT / TESTIMONIAL ── */}
+        <section id="contact" className="contact-section section-dark">
+          <div className="site-shell contact-grid">
+            <div className="testimonial">
+              <p className="eyebrow">What agents are saying</p>
+              <blockquote>
+                &ldquo;This show has helped us win the listing, meet more ideal clients, and build a
+                brand that truly stands out in a crowded market.&rdquo;
+              </blockquote>
+              <div className="agent-row">
+                <span className="agent-avatar" />
+                <p>
+                  <strong>Michael Reynolds</strong><br />
+                  <em>Top Producing Agent</em>
+                </p>
+              </div>
+              <div className="button-row">
+                <a className="btn btn-gold" href="#contact">Request More Info</a>
+                <a className="btn btn-dark" href="#top">Book a Call</a>
+              </div>
+            </div>
+
+            <div className="bottom-portrait">
+              <img src={`${CDN}/malinda-bottom-portrait.png`} alt="Malinda portrait" />
+            </div>
+
+            {status === 'success' ? (
+              <div className="contact-form" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, textAlign: 'center' }}>
+                <p style={{ color: 'var(--gold-2)', fontSize: 18, fontWeight: 700, margin: 0 }}>Request Received!</p>
+                <p style={{ color: 'rgba(255,255,255,.7)', fontSize: 14, margin: 0 }}>We&rsquo;ll be in touch shortly.</p>
+                <button className="btn btn-gold btn-full" onClick={() => setStatus('idle')}>Submit Another</button>
+              </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-grid">
+                  <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+                  <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+                  <input type="tel" name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
+                  <input type="text" name="brokerage" placeholder="Brokerage" value={form.brokerage} onChange={handleChange} />
+                  <input className="full" type="text" name="property" placeholder="Property Address (or Area)" value={form.property} onChange={handleChange} />
+                  <textarea className="full" name="message" placeholder="Tell us about the property" value={form.message} onChange={handleChange} />
+                </div>
+                {status === 'error' && (
+                  <p style={{ color: '#e88b8b', fontSize: 13, textAlign: 'center', margin: '8px 0 0' }}>
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+                <button className="btn btn-gold btn-full" type="submit" disabled={status === 'submitting'}>
+                  {status === 'submitting' ? 'Sending…' : 'Request More Info'}
+                </button>
+                <p className="privacy">&#9638; We respect your privacy. Your information will never be shared.</p>
+              </form>
+            )}
+          </div>
+        </section>
       </main>
-      <Footer />
+
+      {/* ── FOOTER ── */}
+      <footer className="site-footer">
+        <div className="site-shell footer-inner">
+          <img src={`${CDN}/logo-beyond-the-listing.png`} alt="Beyond the Listing" />
+          <p>A hosted home-story show for standout properties.</p>
+          <nav>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#why-agents">Why Agents Love It</a>
+            <a href="#episode-format">Episode Format</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+      </footer>
     </>
   );
 }
