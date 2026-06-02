@@ -402,3 +402,57 @@ dist/assets/index.css   18.11 kB  (gzip: 4.47 kB)
 dist/assets/index.js   429.70 kB  (gzip: 122.77 kB)
 Build time: ~4.4s — 0 errors, 0 warnings
 ```
+
+---
+
+## Static Build Refinement Pass — 2026-06-02
+
+### Purpose
+
+Targeted CSS-only refinements to improve thumbnail crops, hero proportions, atmosphere opacity, and section spacing. No structural or component changes — all fixes applied to `src/index.css`.
+
+### Changes applied
+
+| Selector | Property | Old value | New value | Reason |
+|---|---|---|---|---|
+| `.hero-bg::after` | `opacity` | `.56` | `.65` | Atmosphere image was too faint |
+| `.hero-bg::after` | `filter` | `saturate(.9)` | `saturate(.9) brightness(.85)` | Darken atmosphere slightly for better text contrast |
+| `.hero-grid` | `min-height` | `690px` | `650px` | Tighten hero height toward mockup proportions |
+| `.hero-grid` | `padding` | `54px 0 70px` | `42px 0 58px` | Reduce vertical padding, tighter like mockup |
+| `.episode-media` | `aspect-ratio` | `16 / 8.55` | `16 / 9` | Standard 16:9 for episode preview thumbnail |
+| `.episode-media img` | `object-position` | _(unset)_ | `center center` | Centre the thumbnail composition |
+| `.host-image img` | `object-position` | `center 18%` | `center 20%` | Slight adjustment to host crop |
+| `.show-section` | `padding` | `42px 0 16px` | `58px 0 42px` | More breathing room above and below show section |
+| `.show-video img` | `object-position` | _(unset)_ | `center 32%` | Prevent Malinda's head being cut off |
+| `.deliverable-media.phone` | `max-height` | _(unset)_ | `190px` | Cap phone reel height so cards are proportional |
+| `.deliverable-media.phone img` | `object-position` | _(unset)_ | `center top` | Show subject from top of reel thumbnails |
+| `.logo-link img` | `width` | `184px` | `164px` | Tighten logo to match footer size |
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/index.css` | 11 targeted CSS rule edits (properties only, no selectors added or removed) |
+
+### QA
+
+| Check | Result |
+|---|---|
+| Hero atmosphere visible and darkened | PASS |
+| Hero height reduced from 690px | PASS |
+| Episode preview uses standard 16:9 | PASS |
+| Show video no longer cuts Malinda | PASS |
+| Phone reels capped at 190px max-height | PASS |
+| Reel `object-position: center top` | PASS |
+| Show section has more vertical padding | PASS |
+| Logo width reduced to 164px | PASS |
+| Build passes 0 errors | PASS |
+
+### Build output
+
+```
+dist/index.html                   0.98 kB │ gzip:   0.56 kB
+dist/assets/index-CMVEezQV.css   13.17 kB │ gzip:   3.65 kB
+dist/assets/index-DH-Nksts.js   420.04 kB │ gzip: 119.27 kB
+Build time: ~4.3s — 0 errors, 0 warnings
+```
