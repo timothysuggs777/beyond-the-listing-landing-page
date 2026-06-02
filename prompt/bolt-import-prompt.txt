@@ -1,0 +1,40 @@
+Beyond the Listing — Import Finished Static Build
+
+I am providing a finished static implementation of the Beyond the Listing landing page.
+
+Use these files as the source of truth:
+- index.html
+- styles.css
+- assets/*
+
+This is not a redesign task. Do not reinterpret the mockup. Do not rebuild the layout from scratch. Do not use the old screenshot-slice approach.
+
+Your task:
+1. Import the provided static HTML/CSS into the Bolt project.
+2. Preserve the section order, class names, layout, spacing, colors, typography, and image URLs as much as possible.
+3. If the project must be React/Vite, convert the HTML mechanically into components without changing the design.
+4. Keep styles.css as the design source of truth unless there is a specific build requirement.
+5. Do not use full-page mockup images or section screenshots as live page backgrounds.
+6. Use the existing CDN URLs already included in index.html for key image assets.
+7. Preserve the generated local asset `assets/hero-atmosphere.png` for the hero/contact atmosphere if it is present. If local assets are unreliable in Bolt, replace it with a pure CSS gradient rather than a screenshot background.
+
+QA before complete:
+- Header logo displays and nav aligns.
+- Hero has two columns on desktop.
+- Episode card is contained and not repeated as a background.
+- Host card is contained and does not overlap adjacent sections.
+- What the Show Is uses a clean 3-column grid on desktop.
+- Benefits cards align evenly.
+- What You Get cards stay inside their columns.
+- How It Works and Who It’s For align without collisions.
+- Testimonial, portrait, and form align in three columns on desktop.
+- Mobile stacks cleanly with no horizontal scroll.
+- No broken images.
+- No screenshot ghosting or page-inside-page artifacts.
+
+After import, create/update a markdown report in /reports with:
+- Date + timestamp
+- Files changed
+- Whether the implementation was kept static or converted to React
+- QA checklist pass/fail
+- Any deviations from the provided static build
