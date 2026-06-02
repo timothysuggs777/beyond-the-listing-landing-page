@@ -14,12 +14,13 @@ const formatSteps = [
 
 export default function ShowOverview() {
   return (
-    <section className={`section-light ${styles.showOverview}`}>
+    <section className={`section-light ${styles.section}`}>
       <div className="container">
         <div className={styles.grid}>
-          {/* Col 1: copy */}
+          {/* Left: copy */}
           <div className={styles.copy}>
-            <h2 className="heading-underline">What the Show Is</h2>
+            <h2 className={styles.heading}>What the Show Is</h2>
+            <div className={styles.headingRule} />
             <p>
               Beyond the Listing is a hosted YouTube series led by Malinda that tells the story
               behind exceptional properties and the communities they&rsquo;re in.
@@ -30,23 +31,23 @@ export default function ShowOverview() {
             </p>
           </div>
 
-          {/* Col 2: video card */}
+          {/* Center: video card */}
           <div className={styles.videoCard}>
             <div className={styles.videoThumb}>
-              <img src={CDN.showExplainer} alt="Beyond the Listing show overview" />
+              <img src={CDN.showExplainer} alt="Beyond the Listing — show overview" />
               <div className={styles.videoOverlay}>
-                <button className={styles.videoPlayBtn} aria-label="Play video">
+                <div className={styles.videoPlayBtn}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a">
                     <path d="M5 3l14 9-14 9V3z" />
                   </svg>
-                </button>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Col 3: Episode Format */}
+          {/* Right: Episode Format */}
           <div id="episode-format" className={`card-dark ${styles.formatCard}`}>
-            <h3>Episode Format</h3>
+            <h3 className={styles.formatHeading}>Episode Format</h3>
             <ol className={styles.formatList}>
               {formatSteps.map((step, i) => (
                 <li key={i} className={styles.formatItem}>

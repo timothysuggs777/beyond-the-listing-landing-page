@@ -4,53 +4,66 @@ import styles from './Hero.module.css';
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
-      <div className={`container ${styles.heroGrid}`}>
-        {/* Left: copy */}
-        <div className={styles.heroCopy}>
-          <span className="eyebrow">A YouTube Series for Outstanding Listings</span>
-          <h1>Turn Your Listing Into a Show Worth&nbsp;Watching.</h1>
-          <p className={styles.lead}>
-            Beyond the Listing is a hosted YouTube home-story show that helps agents and brokers
-            showcase standout properties with high-end videography, cinematic storytelling, and
-            strategic outreach.
-          </p>
+      {/* Property photo background with dark overlay */}
+      <div className={styles.bg} style={{ backgroundImage: `url('${CDN.episodePreview}')` }} />
 
-          <div className="cta-row">
+      <div className={`container ${styles.inner}`}>
+        {/* Left: copy */}
+        <div className={styles.copy}>
+          <span className={styles.eyebrow}>A YouTube Series for Outstanding Listings</span>
+          <h1>Turn Your Listing Into a Show Worth Watching.</h1>
+          <p className={styles.lead}>
+            Beyond the Listing is a honed YouTube home-story show that brings agents and brokers
+            immense branded properties with &rsquo;cinematic videography, cinematic videos, and
+            strategic storytelling.
+          </p>
+          <div className={styles.buttons}>
             <a href="#contact" className="btn btn-gold">Request Info</a>
-            <a href="#preview" className="btn btn-outline">
-              <span className={styles.playIcon}>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2.5 1.5L10.5 6 2.5 10.5V1.5Z" fill="currentColor" />
+            <a href="#preview" className={styles.conceptBtn}>
+              <span className={styles.playCircle}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 1.5L8.5 5 2 8.5V1.5Z" fill="currentColor" />
                 </svg>
               </span>
               See the Concept
             </a>
           </div>
-
-          <ul className={styles.heroFeatures}>
-            <li>
-              <span className={styles.featureDot} />
-              5-Minute YouTube Episodes
-            </li>
-            <li>
-              <span className={styles.featureDot} />
-              Cinematic Storytelling That Connects
-            </li>
-            <li>
-              <span className={styles.featureDot} />
-              Designed for Outreach &amp; SEO
-            </li>
-          </ul>
+          <div className={styles.chips}>
+            <div className={styles.chip}>
+              <span className={styles.chipIcon}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
+              <span>5-Minute<br />YouTube Episodes</span>
+            </div>
+            <div className={styles.chip}>
+              <span className={styles.chipIcon}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="2" y="7" width="15" height="10" rx="1" />
+                  <path d="M17 10l4-2v8l-4-2" />
+                </svg>
+              </span>
+              <span>Cinematic Storytelling<br />That Connects</span>
+            </div>
+            <div className={styles.chip}>
+              <span className={styles.chipIcon}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
+              </span>
+              <span>Designed for<br />Outreach &amp; SEO</span>
+            </div>
+          </div>
         </div>
 
         {/* Right: episode preview card */}
-        <aside id="preview" className={`card-dark ${styles.episodeCard}`}>
-          <div className={styles.thumbWrap}>
-            <img
-              src={CDN.episodePreview}
-              alt="Episode preview — Inside a Timeless Estate in Scottsdale"
-              className={styles.thumbImg}
-            />
+        <aside id="preview" className={styles.previewCard}>
+          <div className={styles.previewBadge}>Episode Preview</div>
+          <div className={styles.previewThumb}>
+            <img src={CDN.episodePreview} alt="Inside a Timeless Estate in Scottsdale" />
             <div className={styles.playOverlay}>
               <div className={styles.playBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a">
@@ -59,20 +72,19 @@ export default function Hero() {
               </div>
             </div>
             <span className={styles.runtime}>5:07</span>
-            <span className={styles.previewBadge}>Episode Preview</span>
           </div>
-          <div className={styles.cardMeta}>
-            <h3>Inside a Timeless Estate in Scottsdale</h3>
-            <p className={styles.cardSub}>
-              Episode 2&nbsp;&bull;&nbsp;Scottsdale, Arizona
-              <span className={styles.ytPill}>
-                <svg height="10" viewBox="0 0 80 18" fill="none">
-                  <rect width="80" height="18" rx="3" fill="#FF0000" />
-                  <path d="M33 9L29 6.5v5L33 9z" fill="white" />
-                  <text x="36" y="13" fontFamily="Arial,sans-serif" fontSize="8" fill="white" fontWeight="700">YouTube</text>
+          <div className={styles.previewMeta}>
+            <p className={styles.previewTitle}>Inside a Timeless Estate in Scottsdale</p>
+            <div className={styles.previewSub}>
+              <span>Episode 2 &bull; Scottsdale, Arizona</span>
+              <span className={styles.ytBadge}>
+                <svg height="14" viewBox="0 0 72 16" fill="none">
+                  <rect width="72" height="16" rx="3" fill="#FF0000" />
+                  <path d="M27 8l-3.5-2v4L27 8z" fill="white" />
+                  <text x="29" y="11.5" fontFamily="Arial,sans-serif" fontSize="7.5" fill="white" fontWeight="700">YouTube</text>
                 </svg>
               </span>
-            </p>
+            </div>
           </div>
         </aside>
       </div>

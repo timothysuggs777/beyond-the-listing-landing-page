@@ -1,41 +1,51 @@
-.showOverview {
-  padding: 80px 0 88px;
+.section {
+  padding: 60px 0 72px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 0.72fr 1fr 0.82fr;
-  gap: 36px;
+  grid-template-columns: 0.68fr 0.9fr 0.82fr;
+  gap: 32px;
   align-items: start;
 }
 
-/* Copy column */
+/* Left copy */
 .copy {
   padding-top: 8px;
 }
 
-.copy h2 {
-  margin-bottom: 20px;
+.heading {
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+
+.headingRule {
+  width: 56px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 22px;
 }
 
 .copy p {
   color: var(--muted-dark);
-  font-size: 0.97rem;
+  font-size: 0.95rem;
   line-height: 1.68;
 }
 
-/* Video card */
+/* Video card — roughly square */
 .videoCard {
-  border-radius: var(--radius);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  background: #111;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
 }
 
 .videoThumb {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
+  background: #1a1a1a;
 }
 
 .videoThumb img {
@@ -51,27 +61,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.18);
   transition: background 0.2s;
 }
 
 .videoCard:hover .videoOverlay {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .videoPlayBtn {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.92);
-  border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s;
-  padding: 0;
+  border: none;
+  cursor: pointer;
 }
 
 .videoPlayBtn svg {
@@ -82,19 +91,19 @@
   transform: scale(1.08);
 }
 
-/* Format card */
+/* Episode Format card */
 .formatCard {
-  padding: 26px 26px 28px;
+  padding: 24px 24px 28px;
 }
 
-.formatCard h3 {
+.formatHeading {
   color: var(--gold-soft);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .formatList {
@@ -106,10 +115,10 @@
 .formatItem {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 9px 0;
+  gap: 11px;
+  padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   color: var(--text-light);
   line-height: 1.45;
 }
@@ -120,25 +129,25 @@
 
 .stepNum {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--gold-dim);
   border: 1px solid var(--gold-soft);
   color: var(--gold-soft);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1px;
+  margin-top: 2px;
   font-family: 'Inter', sans-serif;
 }
 
 @media (max-width: 1060px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
 
   .copy {
@@ -146,6 +155,10 @@
   }
 
   .videoCard {
-    max-width: 600px;
+    max-width: 500px;
+  }
+
+  .videoThumb {
+    aspect-ratio: 4 / 3;
   }
 }
