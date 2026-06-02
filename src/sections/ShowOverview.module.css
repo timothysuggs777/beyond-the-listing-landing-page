@@ -1,0 +1,137 @@
+.showOverview {
+  padding: 60px 0;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: 0.75fr 0.95fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.overviewCopy {
+  padding-top: 24px;
+}
+
+.overviewCopy h2 {
+  margin-bottom: 20px;
+}
+
+.overviewCopy p {
+  color: var(--muted-dark);
+  font-size: 0.97rem;
+}
+
+/* Video card */
+.videoCard {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.videoThumb {
+  position: relative;
+}
+
+.videoThumb img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
+.videoPlayOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+
+.videoCard:hover .videoPlayOverlay {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.videoPlayBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s;
+}
+
+.videoCard:hover .videoPlayBtn {
+  transform: scale(1.08);
+}
+
+.videoPlayBtn svg {
+  margin-left: 3px;
+}
+
+/* Episode Format card */
+.formatCard {
+  padding: 26px 28px;
+}
+
+.formatCard h3 {
+  color: var(--gold-soft);
+  font-size: 1.15rem;
+  margin-bottom: 18px;
+}
+
+.formatList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.formatList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  line-height: 1.4;
+}
+
+.formatList li:last-child {
+  border-bottom: none;
+}
+
+.stepNum {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-soft);
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+@media (max-width: 1100px) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .overviewCopy {
+    padding-top: 0;
+  }
+
+  .videoCard {
+    max-width: 600px;
+  }
+}

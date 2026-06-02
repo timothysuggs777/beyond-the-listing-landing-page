@@ -1,0 +1,215 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 40px;
+  min-height: 680px;
+  background: var(--bg);
+  color: var(--text-light);
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      92deg,
+      rgba(10, 10, 10, 0.94) 0%,
+      rgba(10, 10, 10, 0.80) 40%,
+      rgba(10, 10, 10, 0.38) 68%,
+      rgba(10, 10, 10, 0.62) 100%
+    ),
+    url('/assets/episode-preview.png') center top / cover no-repeat;
+  opacity: 1;
+  z-index: 0;
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 32px;
+  align-items: end;
+  padding-bottom: 20px;
+}
+
+.heroCopy {
+  padding-bottom: 32px;
+}
+
+.heroCopy h1 {
+  color: var(--text-light);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.lead {
+  max-width: 520px;
+  color: var(--muted-light);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.heroFeatures {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.heroFeatures li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--muted-light);
+  max-width: 160px;
+  line-height: 1.4;
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--gold-soft);
+}
+
+.playIcon {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  justify-content: center;
+}
+
+/* Episode preview card */
+.episodePreview {
+  overflow: hidden;
+  align-self: end;
+}
+
+.previewThumb {
+  position: relative;
+}
+
+.previewThumb img {
+  width: 100%;
+  display: block;
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  transition: background 0.2s;
+}
+
+.episodePreview:hover .playOverlay {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.playBtn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s;
+}
+
+.episodePreview:hover .playBtn {
+  transform: scale(1.06);
+}
+
+.playBtn svg {
+  margin-left: 3px;
+  color: #1a1a1a;
+}
+
+.runtime {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.72);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.previewBadge {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  background: rgba(10, 10, 10, 0.78);
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--gold-dim);
+}
+
+.previewMeta {
+  padding: 18px 22px 22px;
+}
+
+.previewMeta h3 {
+  color: var(--text-light);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.previewSub {
+  color: var(--muted-light);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.ytBadge {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .heroCopy {
+    padding-bottom: 0;
+  }
+
+  .episodePreview {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 80px 0 32px;
+  }
+
+  .heroFeatures {
+    gap: 20px;
+  }
+
+  .heroFeatures li {
+    max-width: 140px;
+  }
+}

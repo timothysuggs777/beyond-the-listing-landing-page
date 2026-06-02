@@ -1,0 +1,186 @@
+.testimonialContact {
+  padding: 64px 0 80px;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.92)),
+    url('/sections/08-testimonial-cta.png') center / cover no-repeat;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 0.7fr 1.15fr;
+  gap: 28px;
+  align-items: end;
+}
+
+/* Testimonial column */
+.testimonialCopy {
+  padding-bottom: 8px;
+}
+
+.quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.4;
+  color: var(--text-light);
+  margin: 0 0 24px;
+  font-style: italic;
+}
+
+.attribution {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0;
+}
+
+.attributionAvatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-dim);
+  flex-shrink: 0;
+}
+
+.attributionName {
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.attributionRole {
+  color: var(--muted-light);
+  font-size: 0.85rem;
+  margin: 2px 0 0;
+}
+
+/* Portrait column */
+.portraitPanel img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--gold-dim);
+  display: block;
+}
+
+/* Contact card */
+.contactCard {
+  padding: 26px 28px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.formGrid input,
+.formGrid textarea {
+  width: 100%;
+  background: var(--cream-warm);
+  color: var(--text-dark);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 0.93rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.formGrid input:focus,
+.formGrid textarea:focus {
+  border-color: var(--gold-soft);
+  box-shadow: 0 0 0 3px rgba(199, 154, 75, 0.15);
+}
+
+.formGrid input::placeholder,
+.formGrid textarea::placeholder {
+  color: #9b9287;
+}
+
+.formGrid textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.submitBtn {
+  margin-top: 4px;
+  font-size: 1rem;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.privacyNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--muted-light);
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.errorMsg {
+  color: #e88b8b;
+  font-size: 0.88rem;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.successMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+  gap: 12px;
+}
+
+.successMsg h3 {
+  color: var(--gold-soft);
+  margin: 0;
+}
+
+.successMsg p {
+  color: var(--muted-light);
+  font-size: 0.93rem;
+  max-width: 280px;
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitPanel {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .portraitPanel img {
+    max-height: 480px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 720px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+}
