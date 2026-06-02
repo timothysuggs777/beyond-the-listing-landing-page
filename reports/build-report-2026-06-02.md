@@ -844,3 +844,63 @@ dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
 dist/assets/index-zEUaJB5v.js   420.07 kB │ gzip: 119.34 kB
 Build time: ~3.8s — 0 errors, 0 warnings
 ```
+
+---
+
+## Remove Redundant Hero Preview Title Block — 2026-06-02
+
+### Change
+
+Removed the `.episode-info` block and the overlay `episode-label` / `episode-runtime` spans from the hero preview card in `src/App.tsx`. The approved thumbnail already contains all episode metadata inside the image itself.
+
+**Removed markup:**
+```jsx
+<span className="episode-label">Episode Preview</span>
+<span className="episode-runtime">5:07</span>
+<div className="episode-info">
+  <div>
+    <h2>Inside a Timeless Estate in Virginia</h2>
+    <p>Episode 2 <span>•</span> Virginia</p>
+  </div>
+  <div className="youtube-badge">YouTube</div>
+</div>
+```
+
+**Resulting markup:**
+```jsx
+<article className="episode-card">
+  <div className="episode-media">
+    <img src={HERO_THUMB} alt="Episode preview — Inside a Timeless Estate in Virginia" />
+  </div>
+</article>
+```
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Removed `.episode-info` div, `episode-label` span, and `episode-runtime` span from hero card |
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Hero preview displays the approved Virginia thumbnail | PASS |
+| 2 | Duplicate title below thumbnail is gone | PASS |
+| 3 | Duplicate "Episode 2 • Virginia" meta is gone | PASS |
+| 4 | Duplicate YouTube badge is gone | PASS |
+| 5 | Thumbnail fits cleanly inside the card | PASS |
+| 6 | Hero card retains gold border and rounded corners | PASS |
+| 7 | No duplicate play button or label overlays | PASS |
+| 8 | Rest of hero layout unchanged | PASS |
+| 9 | No unrelated sections changed | PASS |
+| 10 | No broken images | PASS |
+
+### Build output
+
+```
+dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
+dist/assets/index-DYgwv9it.js   419.65 kB │ gzip: 119.26 kB
+Build time: ~3.6s — 0 errors, 0 warnings
+```
+```

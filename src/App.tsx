@@ -104,15 +104,6 @@ export default function App() {
             <article className="episode-card">
               <div className="episode-media">
                 <img src={HERO_THUMB} alt="Episode preview — Inside a Timeless Estate in Virginia" />
-                <span className="episode-label">Episode Preview</span>
-                <span className="episode-runtime">5:07</span>
-              </div>
-              <div className="episode-info">
-                <div>
-                  <h2>Inside a Timeless Estate in Virginia</h2>
-                  <p>Episode 2 <span>•</span> Virginia</p>
-                </div>
-                <div className="youtube-badge">YouTube</div>
               </div>
             </article>
           </div>
