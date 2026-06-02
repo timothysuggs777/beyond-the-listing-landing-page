@@ -99,7 +99,7 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src={`${CDN}/hero-episode-preview-virginia.png`} alt="Episode preview — Inside a Timeless Estate in Virginia" />
+                <img src="/assets/hero-episode-preview-virginia.png" alt="Episode preview — Inside a Timeless Estate in Virginia" />
                 <span className="episode-label">Episode Preview</span>
                 <span className="episode-runtime">5:07</span>
               </div>
