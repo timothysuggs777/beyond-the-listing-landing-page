@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabase';
-import logoImg from '../public/assets/beyond_the_listing_logo_design.png';
 
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
-const HERO_THUMB = `${CDN}/hero-episode-preview-virginia.png?v=5`;
+const LOGO = `${CDN}/beyond_the_listing_logo_design.png?v=6`;
+const HERO_THUMB = `${CDN}/hero-episode-preview-virginia.png?v=6`;
 const CONTACT_PORTRAIT = `${CDN}/contact-section-malinda-warm-portrait.png?v=5`;
 
 interface FormState {
@@ -51,7 +51,7 @@ export default function App() {
       <header className="site-header">
         <div className="site-shell header-inner">
           <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
-            <img src={logoImg} alt="Beyond the Listing" />
+            <img src={LOGO} alt="Beyond the Listing" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How It Works</a>
@@ -344,7 +344,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <img src={logoImg} alt="Beyond the Listing" />
+          <img src={LOGO} alt="Beyond the Listing" />
           <p>A hosted home-story show for standout properties.</p>
           <nav>
             <a href="#how-it-works">How It Works</a>

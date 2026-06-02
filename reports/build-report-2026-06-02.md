@@ -726,3 +726,62 @@ dist/assets/index-0dNKYpfA.css   14.75 kB │ gzip:   3.90 kB
 dist/assets/index-DnHeMZuC.js   420.06 kB │ gzip: 119.33 kB
 Build time: ~3.1s — 0 errors, 0 warnings
 ```
+
+---
+
+## Logo + Hero CDN Fix (?v=6) — 2026-06-02
+
+### Problem
+
+The logo was still broken because it used a local ES module import (`../public/assets/beyond_the_listing_logo_design.png`) which does not resolve in Bolt's preview environment. The hero thumbnail needed its cache-bust version bumped to `?v=6`.
+
+### CDN URL verification
+
+| URL | HTTP Status |
+|---|---|
+| `https://cdn.jsdelivr.net/.../beyond-the-listing-logo-crisp.png?v=6` | 404 — this filename does not exist in the repo |
+| `https://cdn.jsdelivr.net/.../beyond_the_listing_logo_design.png` | 200 OK |
+| `https://cdn.jsdelivr.net/.../hero-episode-preview-virginia.png?v=6` | 200 OK |
+
+The prompt-requested logo filename `beyond-the-listing-logo-crisp.png` does not exist at that CDN path. The correct confirmed filename is `beyond_the_listing_logo_design.png` (underscores, no "crisp" suffix).
+
+### Changes made
+
+| Asset | Old Reference | New Reference |
+|---|---|---|
+| Logo (header) | `logoImg` local import | `${CDN}/beyond_the_listing_logo_design.png?v=6` |
+| Logo (footer) | `logoImg` local import | `${CDN}/beyond_the_listing_logo_design.png?v=6` |
+| Hero thumbnail | `${CDN}/hero-episode-preview-virginia.png?v=5` | `${CDN}/hero-episode-preview-virginia.png?v=6` |
+
+Local import of `beyond_the_listing_logo_design.png` removed entirely. `LOGO` constant added alongside `HERO_THUMB` and `CONTACT_PORTRAIT`.
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Removed `logoImg` import; added `LOGO` CDN constant; updated both `<img src={logoImg}>` to `<img src={LOGO}>`; bumped hero `?v=5` → `?v=6` |
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Header logo displays correctly | PASS |
+| 2 | Header logo uses full CDN URL with `?v=6` | PASS (`beyond_the_listing_logo_design.png?v=6`) |
+| 3 | Header logo sharp, not distorted | PASS |
+| 4 | Footer logo uses CDN URL | PASS |
+| 5 | Hero thumbnail displays correctly | PASS |
+| 6 | Hero thumbnail uses full CDN URL with `?v=6` | PASS |
+| 7 | Hero thumbnail is the approved Virginia estate image | PASS |
+| 8 | Hero title: "Inside a Timeless Estate in Virginia" | PASS |
+| 9 | Hero meta: "Episode 2 • Virginia" | PASS |
+| 10 | No duplicate play-button in hero | PASS |
+| 11 | Contact portrait unchanged | PASS |
+| 12 | No unrelated sections changed | PASS |
+
+### Build output
+
+```
+dist/assets/index-0dNKYpfA.css   14.75 kB │ gzip:   3.90 kB
+dist/assets/index-y07N3ARK.js   420.08 kB │ gzip: 119.33 kB
+Build time: ~3.9s — 0 errors, 0 warnings
+```
