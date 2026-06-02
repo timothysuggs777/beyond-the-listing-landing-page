@@ -152,7 +152,7 @@ export default function App() {
         <section className="show-section section-cream">
           <div className="site-shell show-grid">
             <div className="section-copy">
-              <h2>What the Show Is</h2>
+              <h2>About the Show</h2>
               <div className="gold-line" />
               <p>
                 Beyond the Listing is a hosted YouTube series led by Malinda that tells the story

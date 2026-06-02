@@ -533,3 +533,58 @@ dist/assets/index-C1O3YMyJ.css   13.18 kB │ gzip:   3.65 kB
 dist/assets/index-CdZgOtOI.js   420.04 kB │ gzip: 119.27 kB
 Build time: ~3.1s — 0 errors, 0 warnings
 ```
+
+---
+
+## Top-of-Fold Exact Patch — 2026-06-02
+
+### Approach
+
+Full patch block appended at the bottom of `src/index.css` under `/* TOP OF FOLD PATCH — DO NOT REMOVE */` to guarantee cascade wins over any earlier rules. Heading text updated in `src/App.tsx`.
+
+### CSS selectors changed (all in patch block at bottom of file)
+
+| Selector | Change |
+|---|---|
+| `.site-header` | `height: 72px` → `84px` |
+| `.header-inner` | `height: 72px` → `84px` |
+| `.logo-link img` | `276px × 68px` (up from `246px × 60px`; ~50% larger than original 164px) |
+| `.desktop-nav` | Explicit `display: flex; align-items: center` (ensures nav stays vertically centered in taller header) |
+| `.episode-card` | Added `width: min(100%, 600px)` |
+| `.episode-media` | Added `background: #050505` |
+| `.episode-media img` | `object-fit: contain` + `object-position: center center` + `background: #050505` (was `cover`, `center 32%`) |
+| `.episode-media .big-play` | `display: none` — hides page-generated play button since source image already contains one |
+| `.show-video` | `object-fit: contain`, `max-height: 300px`, explicit `border-radius: 14px`, `background: #111` |
+| `.show-video img` | `object-fit: contain` + `object-position: center center` + `background: #111` (was `cover`, `center 18%`) |
+
+### Markup change
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Heading `"What the Show Is"` → `"About the Show"` |
+
+### QA checklist
+
+| Item | Result |
+|---|---|
+| Header logo visibly larger (~50% increase from original) | PASS |
+| Header remains aligned, not crowded | PASS |
+| Nav vertically centered in taller header | PASS |
+| Hero video thumbnail fits inside card (object-fit: contain) | PASS |
+| Hero thumbnail not awkwardly cropped | PASS |
+| Page-generated play button hidden in episode card | PASS |
+| Cream section heading reads "About the Show" | PASS |
+| About the Show thumbnail fits cleanly (object-fit: contain) | PASS |
+| About the Show thumbnail does not cut off Malinda's face | PASS |
+| No lower sections changed | PASS |
+| No broken images | PASS |
+| Build passes 0 errors | PASS |
+
+### Build output
+
+```
+dist/index.html                   0.98 kB │ gzip:   0.55 kB
+dist/assets/index-IIoMLrde.css   14.03 kB │ gzip:   3.75 kB
+dist/assets/index-vbQFBagG.js   420.03 kB │ gzip: 119.26 kB
+Build time: ~3.5s — 0 errors, 0 warnings
+```

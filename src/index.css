@@ -164,3 +164,15 @@ textarea { min-height: 132px; padding-top: 16px; resize: vertical; }
   .footer-inner { text-align: center; justify-items: center; }
   .footer-inner nav { flex-wrap: wrap; justify-content: center; }
 }
+
+/* TOP OF FOLD PATCH — DO NOT REMOVE */
+.site-header { height: 84px; }
+.header-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; }
+.logo-link img { width: 276px; height: 68px; object-fit: contain; }
+.desktop-nav { display: flex; align-items: center; }
+.episode-card { width: min(100%, 600px); border: 1px solid rgba(201,155,69,.62); border-radius: 14px; overflow: hidden; background: rgba(2,2,2,.84); box-shadow: 0 24px 60px rgba(0,0,0,.42); }
+.episode-media { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #050505; }
+.episode-media img { width: 100%; height: 100%; object-fit: contain; object-position: center center; background: #050505; }
+.episode-media .big-play { display: none; }
+.show-video { position: relative; aspect-ratio: 16 / 9; max-height: 300px; overflow: hidden; background: #111; border-radius: 14px; }
+.show-video img { width: 100%; height: 100%; object-fit: contain; object-position: center center; background: #111; }
