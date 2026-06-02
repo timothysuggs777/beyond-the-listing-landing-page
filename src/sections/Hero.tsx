@@ -10,12 +10,12 @@ export default function Hero() {
           backgroundImage: `
             linear-gradient(
               92deg,
-              rgba(10,10,10,0.94) 0%,
-              rgba(10,10,10,0.80) 40%,
-              rgba(10,10,10,0.38) 68%,
-              rgba(10,10,10,0.62) 100%
+              rgba(10,10,10,0.96) 0%,
+              rgba(10,10,10,0.84) 38%,
+              rgba(10,10,10,0.44) 65%,
+              rgba(10,10,10,0.68) 100%
             ),
-            url('${CDN.episodePreview}')
+            url('${CDN.mockupBg}')
           `,
         }}
       />

@@ -23,7 +23,7 @@ export default function Deliverables() {
           {/* Social Reels */}
           <div className={styles.deliverableItem}>
             <h3>Social Clips &amp; Reels</h3>
-            <div className={`${styles.mediaCard} ${styles.reelPair}`}>
+            <div className={styles.reelPair}>
               <img src={CDN.reelThumb1} alt="Social reel clip 1" />
               <img src={CDN.reelThumb2} alt="Social reel clip 2" />
             </div>

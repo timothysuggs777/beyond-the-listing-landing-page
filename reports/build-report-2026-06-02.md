@@ -150,6 +150,50 @@ All 13 image references resolve to files present in `public/`. Build passes clea
 
 ---
 
+## Layout Fix Pass — 2026-06-02
+
+### Issues fixed
+
+**1. Hero background**
+The hero was using the episode preview thumbnail as a full-bleed background, creating a confusing double-image effect where the same image appeared both behind the copy and inside the preview card. Fixed by switching the hero background to `CDN.mockupBg` (the full-page mockup / luxury property image), positioned at `center 20%` so the property scene is visible. Hero height set to `min-height: 760px` with `max-height: 860px` for cinematic proportions. The episode preview card continues to use `CDN.episodePreview` independently.
+
+**2. Hero grid alignment**
+Changed `align-items: end` to `align-items: center` so copy and preview card are vertically centered. Preview card constrained to `max-width: 420px` with `justify-self: end`. Added `aspect-ratio: 16/9` + `object-fit: cover` to the preview thumbnail so it never stretches.
+
+**3. HostStrip portrait**
+Changed `width: 180px; height: auto; object-fit: contain` to `width: 240px; height: 300px; object-fit: cover; object-position: center top` with a rounded border — portrait is now a proper framed photo, not a small floating cutout with white edges. Column width updated from `180px` to `240px`. Host points changed from 3-column horizontal to 1-column vertical stacked list with top/bottom gold rule borders, matching the mockup.
+
+**4. ShowOverview**
+Added `aspect-ratio: 16/10; overflow: hidden` to `.videoThumb` with `object-fit: cover` on the image — the video card now holds a fixed-proportion frame that cannot bleed into adjacent sections. Increased section padding to `72px 0 80px` to create clean separation from Benefits.
+
+**5. Benefits**
+Increased top padding from `20px` to `72px`, eliminating the ghost/overlap artifacts where content from ShowOverview was appearing above this section.
+
+**6. Deliverables**
+- Changed grid to `repeat(4, 1fr)` with equal columns (was `1.1fr 0.9fr 1fr 0.9fr`)
+- Added `aspect-ratio: 16/11` + `overflow: hidden` + `object-fit: cover` to `.mediaCard` — all cards are now the same height
+- Reel pair: removed the double-class `mediaCard reelPair` — `.reelPair` now standalone with its own `aspect-ratio: 16/11`, `grid-template-columns: 1fr 1fr`, both images using `object-fit: cover; height: 100%` — reels stay inside their card boundary
+
+### Files changed in this pass
+
+| File | Change |
+|---|---|
+| `src/sections/Hero.tsx` | Hero bg → `CDN.mockupBg`; preview thumb gets `aspect-ratio` |
+| `src/sections/Hero.module.css` | min-height 760px; align-items center; preview card max-width 420px; aspect-ratio on thumb |
+| `src/sections/HostStrip.module.css` | Portrait 240×300px, object-fit cover; points stacked vertical with gold rules |
+| `src/sections/ShowOverview.module.css` | videoThumb aspect-ratio 16/10 + overflow hidden + object-fit cover; padding 72px 0 80px |
+| `src/sections/Benefits.module.css` | Top padding 20px → 72px |
+| `src/sections/Deliverables.module.css` | Equal 4-col grid; mediaCard aspect-ratio 16/11; reelPair standalone with contained images |
+| `src/sections/Deliverables.tsx` | Removed double-class on reel pair container |
+
+### Image strategy
+All images continue to use jsDelivr CDN URLs via `src/lib/cdn.ts`. Hero background now uses `CDN.mockupBg` (the full-page luxury property mockup) rather than the episode preview thumbnail.
+
+### Build
+0 errors, 0 warnings.
+
+---
+
 ## CDN Image Fix — 2026-06-02
 
 ### Problem

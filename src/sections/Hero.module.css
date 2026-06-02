@@ -1,19 +1,22 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 100px 0 40px;
-  min-height: 680px;
+  padding: 120px 0 60px;
+  min-height: 760px;
+  max-height: 860px;
   background: var(--bg);
   color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .heroBg {
   position: absolute;
   inset: 0;
-  background-position: center top;
+  background-position: center 20%;
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 1;
   z-index: 0;
 }
 
@@ -22,13 +25,12 @@
   z-index: 2;
   display: grid;
   grid-template-columns: 1.15fr 0.95fr;
-  gap: 32px;
-  align-items: end;
-  padding-bottom: 20px;
+  gap: 48px;
+  align-items: center;
 }
 
 .heroCopy {
-  padding-bottom: 32px;
+  padding-bottom: 0;
 }
 
 .heroCopy h1 {
@@ -49,7 +51,7 @@
   display: flex;
   gap: 28px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 28px;
   list-style: none;
   padding: 0;
 }
@@ -85,7 +87,9 @@
 /* Episode preview card */
 .episodePreview {
   overflow: hidden;
-  align-self: end;
+  max-width: 420px;
+  justify-self: end;
+  width: 100%;
 }
 
 .previewThumb {
@@ -95,6 +99,8 @@
 .previewThumb img {
   width: 100%;
   display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .playOverlay {
@@ -160,13 +166,13 @@
 
 .previewMeta h3 {
   color: var(--text-light);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 8px;
 }
 
 .previewSub {
   color: var(--muted-light);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -180,23 +186,26 @@
 
 /* Responsive */
 @media (max-width: 1100px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    align-items: start;
+  .hero {
+    min-height: 600px;
+    max-height: none;
+    padding: 100px 0 48px;
   }
 
-  .heroCopy {
-    padding-bottom: 0;
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .episodePreview {
     max-width: 560px;
+    justify-self: start;
   }
 }
 
 @media (max-width: 720px) {
   .hero {
-    padding: 80px 0 32px;
+    padding: 88px 0 36px;
   }
 
   .heroFeatures {
@@ -205,5 +214,9 @@
 
   .heroFeatures li {
     max-width: 140px;
+  }
+
+  .episodePreview {
+    max-width: 100%;
   }
 }
