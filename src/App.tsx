@@ -48,7 +48,7 @@ export default function App() {
       <header className="site-header">
         <div className="site-shell header-inner">
           <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
-            <img src={`${CDN}/beyond-the-listing-logo-crisp.png?v=2`} alt="Beyond the Listing" />
+            <img src="/assets/beyond_the_listing_logo_design.png" alt="Beyond the Listing" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How It Works</a>
@@ -341,7 +341,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <img src={`${CDN}/beyond-the-listing-logo-crisp.png?v=2`} alt="Beyond the Listing" />
+          <img src="/assets/beyond_the_listing_logo_design.png" alt="Beyond the Listing" />
           <p>A hosted home-story show for standout properties.</p>
           <nav>
             <a href="#how-it-works">How It Works</a>
