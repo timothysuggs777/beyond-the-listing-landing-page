@@ -99,7 +99,7 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src={`${CDN}/episode-preview.png`} alt="Episode preview featuring Malinda and an agent" />
+                <img src="/episode-preview-hero.webp" alt="Episode preview featuring Malinda and an agent" />
                 <span className="episode-label">Episode Preview</span>
                 <span className="episode-runtime">5:07</span>
                 <button className="big-play" type="button">▶</button>
@@ -164,7 +164,7 @@ export default function App() {
               </p>
             </div>
             <div className="show-video media-frame">
-              <img src={`${CDN}/show-explainer-video.png`} alt="Malinda hosting the show" />
+              <img src="/show-explainer-video.webp" alt="Malinda hosting the show" />
               <button className="big-play light" type="button">▶</button>
             </div>
             <aside id="episode-format" className="format-card">
