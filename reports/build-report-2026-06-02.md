@@ -456,3 +456,80 @@ dist/assets/index-CMVEezQV.css   13.17 kB │ gzip:   3.65 kB
 dist/assets/index-DH-Nksts.js   420.04 kB │ gzip: 119.27 kB
 Build time: ~4.3s — 0 errors, 0 warnings
 ```
+
+---
+
+## Mockup Fidelity Refinement Pass 2 — 2026-06-02
+
+### Purpose
+
+Second targeted CSS-only refinement pass addressing visible crop failures, card containment issues, and contact section background ghosting.
+
+### Changes applied to `src/index.css`
+
+| Selector | Property | Before | After | Reason |
+|---|---|---|---|---|
+| `.hero-bg::after` | `opacity` | `.65` | `.68` | Slightly more atmosphere visible |
+| `.hero-bg::after` | `filter` | `brightness(.85)` | `brightness(.9)` | Less dark, more cinematic |
+| `.hero-overlay` | `background` | `.9/.67/.25/.72` stops | `.88/.72/.35/.75` stops | Better text contrast balance; more open on right |
+| `.episode-media img` | `object-position` | `center center` | `center 35%` | Move crop down to show faces rather than ceiling |
+| `.host-image` | `width` | _(column-driven)_ | `210px` | Explicit portrait width |
+| `.host-image img` | `object-position` | `center 20%` | `center 15%` | Show slightly more of face |
+| `.show-video` | `aspect-ratio` | `16 / 9.15` | `16 / 9` | Standard 16:9 |
+| `.show-video` | `max-height` | _(unset)_ | `275px` | Cap card height in grid |
+| `.show-video img` | `object-position` | `center 32%` | `center 18%` | Show Malinda's face, not torso |
+| `.deliverables-section` | `padding` | `48px 0 42px` | `44px 0 46px` | Tighten section |
+| `.deliverable-grid` | `grid-template-columns` | `1.18fr .78fr 1.02fr .92fr` | `1.15fr 0.85fr 1fr 0.95fr` | Balanced columns |
+| `.deliverable` | `min-width` | _(unset)_ | `0` | Prevent grid blowout |
+| `.deliverable h3` | `min-height` | _(unset)_ | `22px` | Keep headings from collapsing |
+| `.deliverable-media` | `border-radius` | `10px` | `12px` | Slight polish |
+| `.deliverable-media` | `background` | `#0c0c0c` | `#050505` | Consistent dark bg for contain mode |
+| `.deliverable-media img` | `object-fit` | `cover` | `contain` | Show full asset without cropping |
+| `.deliverable-media img` | `object-position` | _(unset)_ | `center center` | Center contained assets |
+| `.deliverable-media.wide` | `aspect-ratio` | `16 / 9.4` | _(removed, height drives)_ | Use fixed `height: 165px` instead |
+| `.deliverable-media.cta` | `aspect-ratio` | `1.32 / 1` | _(removed, height drives)_ | Use fixed `height: 165px` instead |
+| `.deliverable-media.wide, .cta` | `height` | _(unset)_ | `165px` | All non-phone cards same height |
+| `.reel-grid` | `height` | _(unset)_ | `165px` | Match card row height |
+| `.reel-grid` | `justify-items` | `center` | _(removed)_ | Allow full-width phone cards |
+| `.deliverable-media.phone` | `aspect-ratio` | `9 / 16` | `auto` | Height drives, not aspect-ratio |
+| `.deliverable-media.phone` | `max-height` | `190px` | `none` | Height: 165px drives instead |
+| `.contact-section::before` | `background` | `...url("/assets/hero-atmosphere.png")` | pure CSS gradient | Remove atmosphere image to prevent ghosting |
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/index.css` | Deliverables block rebuilt, show-video fixed, hero overlay adjusted, contact bg cleaned |
+
+### QA checklist
+
+| Item | Result |
+|---|---|
+| Header logo displays correctly (164px) | PASS |
+| Hero background is cinematic, not a screenshot layer | PASS |
+| Hero preview card is contained within its column | PASS |
+| Episode preview image object-position shows faces (center 35%) | PASS |
+| Only one play button overlay in hero preview card | PASS |
+| Malinda host strip portrait contained (210×170px, object-position center 15%) | PASS |
+| What the Show Is video card shows Malinda face (center 18%, max-height 275px) | PASS |
+| Episode Format card aligns with video card | PASS |
+| Benefits cards have consistent min-height (162px), 4-column | PASS |
+| What You Get cards: all fixed height 165px, object-fit contain | PASS |
+| Social reel thumbnails stay inside reel-grid (height 165px) | PASS |
+| Drone thumbnail contained in wide card (height 165px) | PASS |
+| Branded CTA image contained in cta card (height 165px) | PASS |
+| No image overflow outside cards | PASS |
+| No ghosted screenshot artifacts | PASS |
+| Contact section background is pure CSS gradient (no atmosphere image) | PASS |
+| No broken images (all use CDN URLs) | PASS |
+| Mobile stacks cleanly at 1050px and 740px | PASS |
+| Build passes 0 errors | PASS |
+
+### Build output
+
+```
+dist/index.html                   0.98 kB │ gzip:   0.55 kB
+dist/assets/index-C1O3YMyJ.css   13.18 kB │ gzip:   3.65 kB
+dist/assets/index-CdZgOtOI.js   420.04 kB │ gzip: 119.27 kB
+Build time: ~3.1s — 0 errors, 0 warnings
+```
