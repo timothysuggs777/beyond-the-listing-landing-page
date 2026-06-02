@@ -48,7 +48,7 @@ export default function App() {
       <header className="site-header">
         <div className="site-shell header-inner">
           <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
-            <img src={`${CDN}/logo-beyond-the-listing.png`} alt="Beyond the Listing" />
+            <img src={`${CDN}/beyond-the-listing-logo-crisp.png?v=2`} alt="Beyond the Listing" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How It Works</a>
@@ -185,7 +185,7 @@ export default function App() {
         {/* ── BENEFITS ── */}
         <section id="why-agents" className="benefits-section section-cream">
           <div className="site-shell">
-            <h2 className="section-title">Why Agents and Brokers Use It</h2>
+            <h2 className="benefits-title">Why Agents and Brokers Use It</h2>
             <div className="benefit-grid">
               <article className="benefit-card">
                 <div className="benefit-icon">☆</div>
@@ -341,7 +341,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <img src={`${CDN}/logo-beyond-the-listing.png`} alt="Beyond the Listing" />
+          <img src={`${CDN}/beyond-the-listing-logo-crisp.png?v=2`} alt="Beyond the Listing" />
           <p>A hosted home-story show for standout properties.</p>
           <nav>
             <a href="#how-it-works">How It Works</a>

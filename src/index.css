@@ -168,7 +168,7 @@ textarea { min-height: 132px; padding-top: 16px; resize: vertical; }
 /* TOP OF FOLD PATCH — DO NOT REMOVE */
 .site-header { height: 84px; }
 .header-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; }
-.logo-link img { width: 276px; height: 68px; object-fit: contain; }
+.logo-link img { width: 276px; height: auto; max-height: 72px; object-fit: contain; display: block; }
 .desktop-nav { display: flex; align-items: center; }
 .episode-card { width: min(100%, 600px); border: 1px solid rgba(201,155,69,.62); border-radius: 14px; overflow: hidden; background: rgba(2,2,2,.84); box-shadow: 0 24px 60px rgba(0,0,0,.42); }
 .episode-media { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #050505; }
@@ -176,3 +176,37 @@ textarea { min-height: 132px; padding-top: 16px; resize: vertical; }
 .episode-media .big-play { display: none; }
 .show-video { position: relative; aspect-ratio: 16 / 9; max-height: 300px; overflow: hidden; background: #111; border-radius: 14px; }
 .show-video img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; background: #111; }
+
+/* FINAL LOGO + BENEFITS HEADING PATCH */
+.footer-inner img { width: 220px; height: auto; object-fit: contain; display: block; }
+.benefits-title {
+  font-family: var(--font-serif);
+  font-size: 43px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 0 0 34px;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+.benefits-title::before,
+.benefits-title::after {
+  content: "";
+  display: block;
+  flex: 1 1 160px;
+  max-width: 260px;
+  height: 1px;
+  background: rgba(201,155,69,.42);
+}
+@media (max-width: 900px) {
+  .benefits-title { white-space: normal; gap: 18px; }
+  .benefits-title::before, .benefits-title::after { max-width: 90px; }
+}
+@media (max-width: 640px) {
+  .benefits-title::before, .benefits-title::after { display: none; }
+}

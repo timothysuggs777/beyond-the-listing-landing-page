@@ -588,3 +588,74 @@ dist/assets/index-IIoMLrde.css   14.03 kB │ gzip:   3.75 kB
 dist/assets/index-vbQFBagG.js   420.03 kB │ gzip: 119.26 kB
 Build time: ~3.5s — 0 errors, 0 warnings
 ```
+
+---
+
+## Logo + Benefits Heading Patch — 2026-06-02
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/App.tsx` | Logo src replaced (header + footer); benefits heading class changed |
+| `src/index.css` | Logo CSS updated; `.benefits-title` flex rule added |
+
+### Logo replacement
+
+| Location | Old path | New path |
+|---|---|---|
+| Header `<img>` | `logo-beyond-the-listing.png` | `beyond-the-listing-logo-crisp.png?v=2` |
+| Footer `<img>` | `logo-beyond-the-listing.png` | `beyond-the-listing-logo-crisp.png?v=2` |
+
+### Benefits heading fix — CSS used
+
+Heading class changed from `section-title` to `benefits-title` to avoid the existing `section-title::before/::after` absolute-position rules overlapping the text. Flex layout places the lines as flex children so they cannot reach behind the words.
+
+```css
+.benefits-title {
+  font-family: var(--font-serif);
+  font-size: 43px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 0 0 34px;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+.benefits-title::before,
+.benefits-title::after {
+  content: "";
+  flex: 1 1 160px;
+  max-width: 260px;
+  height: 1px;
+  background: rgba(201,155,69,.42);
+}
+```
+
+### QA checklist
+
+| Item | Result |
+|---|---|
+| Header logo uses `beyond-the-listing-logo-crisp.png` | PASS |
+| Header logo appears sharp, not fuzzy | PASS |
+| Header logo not distorted (height auto, max-height 72px) | PASS |
+| Header/nav remain aligned | PASS |
+| Footer logo uses crisp logo | PASS |
+| "Why Agents and Brokers Use It" heading centered | PASS |
+| Decorative gold line stops before heading text | PASS |
+| No line passes through or behind letters | PASS |
+| Other section headings unaffected | PASS |
+| No unrelated layout changes | PASS |
+| Build passes 0 errors | PASS |
+
+### Build output
+
+```
+dist/assets/index-CBodwuwe.css   14.73 kB │ gzip:   3.89 kB
+dist/assets/index-DAqOupq6.js   420.07 kB │ gzip: 119.27 kB
+Build time: ~4.3s — 0 errors, 0 warnings
+```
