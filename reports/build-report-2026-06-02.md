@@ -150,6 +150,91 @@ All 13 image references resolve to files present in `public/`. Build passes clea
 
 ---
 
+## Strict Mockup-Aligned Rebuild + QA — 2026-06-02
+
+### Problem being fixed
+Previous implementation had drifted significantly: the full-page mockup screenshot and section crop screenshots were being used as live backgrounds, causing "page inside a page" ghosting artifacts, repeated screenshot layers, section overlaps, and broken card containment throughout.
+
+### Rebuild approach
+Every section was rewritten from scratch with these hard rules:
+- Zero screenshot images used as live backgrounds anywhere on the page
+- All section backgrounds use CSS only (gradients, solid colors)
+- All media images use individual CDN-hosted assets inside defined containers
+- All media containers use `aspect-ratio` + `overflow: hidden` + `object-fit: cover`
+- All grid layouts use `repeat(N, 1fr)` with no unequal fractional tricks that cause blowout
+- No `position: absolute` for section layout
+- No negative margins
+- No `transform: scale` for sizing
+
+### Image strategy
+All 10 individual asset images served from jsDelivr CDN via `src/lib/cdn.ts`. The `CDN.mockupBg` and `CDN.testimonialBg` constants remain defined for reference but are intentionally unused in any rendered output.
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/sections/Hero.tsx` | Rewritten — pure CSS gradient bg, no inline backgroundImage, episode card uses CDN.episodePreview only as `<img>` |
+| `src/sections/Hero.module.css` | Rewritten — pure radial+linear gradient bg, min-height 780px, no url() |
+| `src/sections/HostStrip.tsx` | Rewritten — portrait in `portraitWrap` with overflow:hidden, credentials in `cred` rows |
+| `src/sections/HostStrip.module.css` | Rewritten — pure gradient bg, portrait 200×240px with object-fit cover, credentials stacked with gold rule borders |
+| `src/sections/ShowOverview.tsx` | Rewritten — clean 3-col, video card in fixed aspect-ratio container |
+| `src/sections/ShowOverview.module.css` | Rewritten — videoThumb aspect-ratio 16/10, overflow:hidden, no url() |
+| `src/sections/Deliverables.tsx` | Rewritten — `mediaCard` and `reelCard` separate classes, no `section-dark` class dependency |
+| `src/sections/Deliverables.module.css` | Rewritten — all cards aspect-ratio 16/11, overflow:hidden, object-fit cover, reelCard is 1fr 1fr grid |
+| `src/sections/TestimonialContact.tsx` | Rewritten — no backgroundImage style prop, portrait in `portraitFrame` with overflow:hidden |
+| `src/sections/TestimonialContact.module.css` | Rewritten — no background url(), portrait contained, 3-col grid |
+| `src/components/Header.module.css` | navRow min-height reduced from 84px to 72px |
+
+### QA Checklist (all 40 items PASS)
+
+| Section | Check | Result |
+|---|---|---|
+| Header | Height ~72px | PASS |
+| Header | Logo uses CDN src | PASS |
+| Header | All nav links present | PASS |
+| Header | No broken local image refs | PASS |
+| Hero | No backgroundImage url() in TSX | PASS |
+| Hero | No CDN.mockupBg used | PASS |
+| Hero | No /sections/ screenshots | PASS |
+| Hero | Episode preview only inside card as img | PASS |
+| Hero | Pure CSS gradient in .module.css | PASS |
+| Hero | min-height 780px | PASS |
+| HostStrip | No background-image/inline url() | PASS |
+| HostStrip | No url() in CSS | PASS |
+| HostStrip | Portrait in overflow:hidden wrapper | PASS |
+| HostStrip | Three credential rows present | PASS |
+| ShowOverview | No /sections/ screenshots | PASS |
+| ShowOverview | Video card in aspect-ratio container | PASS |
+| ShowOverview | overflow:hidden on videoThumb | PASS |
+| ShowOverview | 3-column desktop grid | PASS |
+| Benefits | Top padding ≥72px | PASS |
+| Benefits | repeat(4, 1fr) grid | PASS |
+| Benefits | White cards, gold icons | PASS |
+| Deliverables | No CDN.mockupBg or /sections/ refs | PASS |
+| Deliverables | All mediaCards have aspect-ratio | PASS |
+| Deliverables | reelCard is separate class with 1fr 1fr grid | PASS |
+| Deliverables | overflow:hidden on both card types | PASS |
+| Deliverables | repeat(4, 1fr) grid | PASS |
+| ProcessAudience | section-light (cream) background | PASS |
+| ProcessAudience | 4 process steps | PASS |
+| ProcessAudience | 4 audience items | PASS |
+| ProcessAudience | No screenshot backgrounds | PASS |
+| TestimonialContact | No backgroundImage style prop | PASS |
+| TestimonialContact | No background url() in CSS | PASS |
+| TestimonialContact | Portrait in overflow:hidden frame | PASS |
+| TestimonialContact | 3-column desktop grid | PASS |
+| TestimonialContact | All 6 form fields present | PASS |
+| Images | All src= props use CDN URLs | PASS |
+| Images | No local /assets paths in src | PASS |
+| Images | No /sections/ screenshots as live content | PASS |
+| Global CSS | No background-image url() in index.css | PASS |
+| Global CSS | Container max-width (1200px) defined | PASS |
+
+### Build
+0 errors, 0 warnings.
+
+---
+
 ## Layout Fix Pass — 2026-06-02
 
 ### Issues fixed

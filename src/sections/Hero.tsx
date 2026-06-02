@@ -4,22 +4,6 @@ import styles from './Hero.module.css';
 export default function Hero() {
   return (
     <section id="hero" className={styles.hero}>
-      <div
-        className={styles.heroBg}
-        style={{
-          backgroundImage: `
-            linear-gradient(
-              92deg,
-              rgba(10,10,10,0.96) 0%,
-              rgba(10,10,10,0.84) 38%,
-              rgba(10,10,10,0.44) 65%,
-              rgba(10,10,10,0.68) 100%
-            ),
-            url('${CDN.mockupBg}')
-          `,
-        }}
-      />
-
       <div className={`container ${styles.heroGrid}`}>
         {/* Left: copy */}
         <div className={styles.heroCopy}>
@@ -35,8 +19,8 @@ export default function Hero() {
             <a href="#contact" className="btn btn-gold">Request Info</a>
             <a href="#preview" className="btn btn-outline">
               <span className={styles.playIcon}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M3 1.5L12 7 3 12.5V1.5Z" fill="currentColor" />
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2.5 1.5L10.5 6 2.5 10.5V1.5Z" fill="currentColor" />
                 </svg>
               </span>
               See the Concept
@@ -45,59 +29,47 @@ export default function Hero() {
 
           <ul className={styles.heroFeatures}>
             <li>
-              <span className={styles.featureIcon}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none" />
-                </svg>
-              </span>
+              <span className={styles.featureDot} />
               5-Minute YouTube Episodes
             </li>
             <li>
-              <span className={styles.featureIcon}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <path d="M15 10l4.553-2.527A1 1 0 0121 8.382v7.236a1 1 0 01-1.447.895L15 14M3 8h12v8H3z" />
-                </svg>
-              </span>
+              <span className={styles.featureDot} />
               Cinematic Storytelling That Connects
             </li>
             <li>
-              <span className={styles.featureIcon}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="M21 21l-4.35-4.35" />
-                </svg>
-              </span>
+              <span className={styles.featureDot} />
               Designed for Outreach &amp; SEO
             </li>
           </ul>
         </div>
 
         {/* Right: episode preview card */}
-        <aside id="preview" className={`card-dark ${styles.episodePreview}`}>
-          <div className={styles.previewThumb}>
-            <img src={CDN.episodePreview} alt="Episode preview — Inside a Timeless Estate in Scottsdale" />
+        <aside id="preview" className={`card-dark ${styles.episodeCard}`}>
+          <div className={styles.thumbWrap}>
+            <img
+              src={CDN.episodePreview}
+              alt="Episode preview — Inside a Timeless Estate in Scottsdale"
+              className={styles.thumbImg}
+            />
             <div className={styles.playOverlay}>
               <div className={styles.playBtn}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a">
                   <path d="M5 3l14 9-14 9V3z" />
                 </svg>
               </div>
             </div>
             <span className={styles.runtime}>5:07</span>
-            <span className={styles.previewBadge}>
-              <span className="eyebrow" style={{ margin: 0, color: 'var(--gold-soft)' }}>Episode Preview</span>
-            </span>
+            <span className={styles.previewBadge}>Episode Preview</span>
           </div>
-          <div className={styles.previewMeta}>
+          <div className={styles.cardMeta}>
             <h3>Inside a Timeless Estate in Scottsdale</h3>
-            <p className={styles.previewSub}>
+            <p className={styles.cardSub}>
               Episode 2&nbsp;&bull;&nbsp;Scottsdale, Arizona
-              <span className={styles.ytBadge}>
-                <svg height="12" viewBox="0 0 90 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="90" height="20" rx="4" fill="#FF0000"/>
-                  <path d="M37.5 10L33 7.5v5L37.5 10z" fill="white"/>
-                  <text x="41" y="14.5" fontFamily="Arial, sans-serif" fontSize="9" fill="white" fontWeight="bold">YouTube</text>
+              <span className={styles.ytPill}>
+                <svg height="10" viewBox="0 0 80 18" fill="none">
+                  <rect width="80" height="18" rx="3" fill="#FF0000" />
+                  <path d="M33 9L29 6.5v5L33 9z" fill="white" />
+                  <text x="36" y="13" fontFamily="Arial,sans-serif" fontSize="8" fill="white" fontWeight="700">YouTube</text>
                 </svg>
               </span>
             </p>

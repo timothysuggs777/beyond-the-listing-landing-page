@@ -1,93 +1,100 @@
 .deliverables {
-  padding: 64px 0 72px;
+  background: var(--bg);
+  color: var(--text-light);
+  padding: 72px 0 80px;
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.heading {
+  text-align: center;
   margin-bottom: 48px;
+  position: relative;
 }
 
-.headerLine {
-  flex: 1;
+.heading h2 {
+  color: var(--text-light);
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.heading h2::before,
+.heading h2::after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 60px;
   height: 1px;
   background: var(--gold-dim);
+  margin: 0 18px;
 }
 
-.sectionTitle {
-  flex-shrink: 0;
-  color: var(--text-light);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.deliverableGrid {
+.grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 22px;
   align-items: start;
 }
 
-.deliverableItem {
+.item {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.deliverableItem h3 {
+.item h3 {
   color: var(--text-light);
-  font-size: 0.95rem;
-  text-align: center;
   font-family: 'Inter', sans-serif;
+  font-size: 0.93rem;
   font-weight: 600;
+  text-align: center;
   margin: 0;
   letter-spacing: 0.01em;
 }
 
+/* All media cards: fixed aspect, overflow hidden, object-fit cover */
 .mediaCard {
+  width: 100%;
+  aspect-ratio: 16 / 11;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  aspect-ratio: 16 / 11;
-  background: rgba(20, 20, 20, 0.6);
+  background: #111;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
 .mediaCard img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
-  border-radius: 14px;
+  display: block;
 }
 
-/* Reel pair: two portrait images side by side inside the card */
-.reelPair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+/* Reel pair: two portraits side by side in same aspect-ratio box */
+.reelCard {
+  width: 100%;
   aspect-ratio: 16 / 11;
   border-radius: 14px;
   overflow: hidden;
-  padding: 0;
+  background: #111;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
 }
 
-.reelPair img {
+.reelCard img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 8px;
 }
 
-@media (max-width: 1100px) {
-  .deliverableGrid {
-    grid-template-columns: 1fr 1fr;
+@media (max-width: 1060px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 560px) {
-  .deliverableGrid {
+  .grid {
     grid-template-columns: 1fr;
   }
 }

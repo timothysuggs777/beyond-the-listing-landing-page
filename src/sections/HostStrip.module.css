@@ -1,110 +1,118 @@
 .hostStrip {
-  padding: 48px 0;
+  background: var(--bg);
+  padding: 0 0 48px;
 }
 
-.stripCard {
+.card {
   display: grid;
-  grid-template-columns: 240px 1fr 1.1fr;
+  grid-template-columns: 200px 1fr auto;
   gap: 40px;
   align-items: center;
-  padding: 32px 40px;
   border: 1px solid var(--gold-dim);
   border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(22, 20, 16, 0.99), rgba(10, 10, 10, 0.99));
+  background: linear-gradient(135deg, #141210 0%, #0c0b09 100%);
+  padding: 28px 36px;
+  overflow: hidden;
 }
 
-.hostCutout {
-  width: 240px;
-  height: 300px;
+.portraitWrap {
+  width: 200px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--gold-dim);
+  flex-shrink: 0;
+  background: #1a1710;
+}
+
+.portrait {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
-  border-radius: 12px;
-  border: 1px solid var(--gold-dim);
 }
 
-.hostCopy h2 {
+.copy h2 {
   color: var(--text-light);
   margin-bottom: 12px;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
 }
 
-.hostCopy p {
+.copy p {
   color: var(--muted-light);
-  max-width: 440px;
   font-size: 0.97rem;
-  margin: 0;
   line-height: 1.65;
+  max-width: 420px;
+  margin: 0;
 }
 
-.hostPoints {
-  display: grid;
-  grid-template-columns: 1fr;
+.credentials {
+  display: flex;
+  flex-direction: column;
   gap: 0;
+  min-width: 260px;
+  border-left: 1px solid var(--gold-line);
+  padding-left: 32px;
 }
 
-.iconPoint {
+.cred {
   display: flex;
   align-items: center;
-  text-align: left;
-  padding: 16px 20px;
-  border-top: 1px solid var(--gold-line);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gold-line);
   color: var(--text-light);
   font-size: 0.93rem;
-  gap: 14px;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
-.iconPoint:last-child {
-  border-bottom: 1px solid var(--gold-line);
+.cred:first-child {
+  border-top: 1px solid var(--gold-line);
 }
 
-.pointIcon {
-  color: var(--gold-soft);
-  display: flex;
-  align-items: center;
+.cred svg {
   flex-shrink: 0;
 }
 
-/* Responsive */
-@media (max-width: 1100px) {
-  .stripCard {
+@media (max-width: 1060px) {
+  .card {
     grid-template-columns: 1fr;
     text-align: center;
     padding: 28px 24px;
     gap: 28px;
   }
 
-  .hostCutout {
-    width: 180px;
-    height: 220px;
-    margin-inline: auto;
+  .portraitWrap {
+    width: 160px;
+    height: 196px;
+    margin: 0 auto;
   }
 
-  .hostCopy {
-    text-align: center;
+  .copy p {
+    margin: 0 auto;
   }
 
-  .hostCopy p {
-    margin-inline: auto;
+  .credentials {
+    border-left: none;
+    padding-left: 0;
+    min-width: auto;
+    width: 100%;
   }
 
-  .iconPoint {
-    border-bottom: none;
+  .cred {
+    justify-content: center;
     text-align: left;
-  }
-
-  .iconPoint:last-child {
-    border-bottom: 1px solid var(--gold-line);
   }
 }
 
 @media (max-width: 720px) {
   .hostStrip {
-    padding: 32px 0;
+    padding-bottom: 36px;
   }
 
-  .hostCutout {
-    width: 140px;
-    height: 170px;
+  .portraitWrap {
+    width: 130px;
+    height: 158px;
   }
 }
