@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabase';
+import heroThumb from '../public/assets/hero-episode-preview-virginia copy.png';
 
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
 const LOGO = `${CDN}/beyond_the_listing_logo_design.png?v=6`;
-const HERO_THUMB = `${CDN}/hero-episode-preview-virginia.png?v=6`;
+const HERO_THUMB = heroThumb;
 const CONTACT_PORTRAIT = `${CDN}/contact-section-malinda-warm-portrait.png?v=5`;
 
 interface FormState {
