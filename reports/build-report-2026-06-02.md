@@ -785,3 +785,62 @@ dist/assets/index-0dNKYpfA.css   14.75 kB │ gzip:   3.90 kB
 dist/assets/index-y07N3ARK.js   420.08 kB │ gzip: 119.33 kB
 Build time: ~3.9s — 0 errors, 0 warnings
 ```
+
+---
+
+## Mobile Header + Hero Stacking Fix — 2026-06-02
+
+### Root cause
+
+The `/* TOP OF FOLD PATCH */` block at the bottom of `src/index.css` set `.site-header { height: 84px }` and `.header-inner { height: 84px }` with no mobile override, causing the header to maintain a fixed height on mobile. This made the logo overlap the nav and the nav collide with the hero eyebrow.
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `src/index.css` | Added `@media (max-width: 768px)` block and `@media (max-width: 460px)` block at end of file |
+
+### Mobile CSS rules added (`@media (max-width: 768px)`)
+
+- `html, body`: `overflow-x: hidden`
+- `.site-shell`: `width: min(100% - 40px, var(--shell))`
+- `.site-header`: `height: auto !important; position: relative; padding: 12px 0 16px`
+- `.header-inner`: `height: auto !important; flex-direction: column; align-items: center; gap: 14px`
+- `.logo-link img`: `width: min(220px, 72vw) !important; height: auto !important; max-height: none !important`
+- `.desktop-nav`: `flex-wrap: wrap; justify-content: center; gap: 12px 18px`
+- `.hero-grid`: `grid-template-columns: 1fr; padding: 48px 0 48px`
+- `.hero h1`: `font-size: clamp(46px, 13vw, 72px) !important`
+- `.button-row`: `grid-template-columns: 1fr 1fr; gap: 16px`
+- `.hero-points`: `grid-template-columns: 1fr; gap: 24px`
+- `.episode-card`: `width: 100% !important; max-width: 100% !important`
+- `.host-card, .show-grid, .benefit-grid, .deliverable-grid, .process-grid, .audience-grid, .contact-grid`: `grid-template-columns: 1fr !important`
+- `.footer-inner`: `grid-template-columns: 1fr; text-align: center`
+
+`@media (max-width: 460px)`: `.button-row { grid-template-columns: 1fr }`
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | Logo centered, not overlapping nav | PASS |
+| 2 | Nav links visible, not colliding | PASS |
+| 3 | Book a Call button sits cleanly in nav row | PASS |
+| 4 | Hero eyebrow fully visible | PASS |
+| 5 | Hero headline starts below header with proper spacing | PASS |
+| 6 | Hero body copy readable | PASS |
+| 7 | Hero buttons align in 2-col grid (1-col below 460px) | PASS |
+| 8 | Feature points stack single-column cleanly | PASS |
+| 9 | Hero preview card full-width, no horizontal clipping | PASS |
+| 10 | No horizontal scrolling | PASS |
+| 11 | Desktop layout unchanged | PASS |
+| 12 | Contact portrait unchanged | PASS |
+| 13 | Hero image uses local imported file | PASS |
+| 14 | Logo uses CDN URL | PASS |
+
+### Build output
+
+```
+dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
+dist/assets/index-zEUaJB5v.js   420.07 kB │ gzip: 119.34 kB
+Build time: ~3.8s — 0 errors, 0 warnings
+```
