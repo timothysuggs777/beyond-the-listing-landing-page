@@ -99,15 +99,14 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src="/episode-preview-hero.webp" alt="Episode preview featuring Malinda and an agent" />
+                <img src={`${CDN}/hero-episode-preview-virginia.png`} alt="Episode preview — Inside a Timeless Estate in Virginia" />
                 <span className="episode-label">Episode Preview</span>
                 <span className="episode-runtime">5:07</span>
-                <button className="big-play" type="button">▶</button>
               </div>
               <div className="episode-info">
                 <div>
-                  <h2>Inside a Timeless Estate in Scottsdale</h2>
-                  <p>Episode 2 <span>•</span> Scottsdale, Arizona</p>
+                  <h2>Inside a Timeless Estate in Virginia</h2>
+                  <p>Episode 2 <span>•</span> Virginia</p>
                 </div>
                 <div className="youtube-badge">YouTube</div>
               </div>
@@ -164,7 +163,7 @@ export default function App() {
               </p>
             </div>
             <div className="show-video media-frame">
-              <img src="/show-explainer-video.webp" alt="Malinda hosting the show" />
+              <img src={`${CDN}/about-show-malinda-courtyard.png`} alt="Malinda hosting the show" />
               <button className="big-play light" type="button">▶</button>
             </div>
             <aside id="episode-format" className="format-card">
@@ -220,30 +219,30 @@ export default function App() {
               <article className="deliverable">
                 <h3>Full YouTube Episode</h3>
                 <div className="deliverable-media wide">
-                  <img src={`${CDN}/youtube-episode-thumbnail.png`} alt="Full YouTube episode thumbnail" />
+                  <img src={`${CDN}/deliverable-full-episode-virginia.png`} alt="Full YouTube episode thumbnail" />
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Social Clips &amp; Reels</h3>
                 <div className="reel-grid">
                   <div className="deliverable-media phone">
-                    <img src={`${CDN}/reels-thumbnail-1.png`} alt="Social reel thumbnail one" />
+                    <img src={`${CDN}/deliverable-reel-1-virginia.png`} alt="Social reel thumbnail one" />
                   </div>
                   <div className="deliverable-media phone">
-                    <img src={`${CDN}/reels-thumbnail-2.png`} alt="Social reel thumbnail two" />
+                    <img src={`${CDN}/deliverable-reel-2-virginia.png`} alt="Social reel thumbnail two" />
                   </div>
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Drone &amp; B-Roll Footage</h3>
                 <div className="deliverable-media wide">
-                  <img src={`${CDN}/drone-thumbnail.png`} alt="Drone footage thumbnail" />
+                  <img src={`${CDN}/deliverable-drone-broll-virginia.png`} alt="Drone footage thumbnail" />
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Branded CTA &amp; Contact Assets</h3>
                 <div className="deliverable-media cta">
-                  <img src={`${CDN}/branded-cta-card.png`} alt="Branded call-to-action asset" />
+                  <img src={`${CDN}/deliverable-branded-cta-virginia.png`} alt="Branded call-to-action asset" />
                 </div>
               </article>
             </div>
