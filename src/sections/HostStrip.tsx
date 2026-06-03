@@ -1,4 +1,3 @@
-import { CDN } from '../lib/cdn';
 import styles from './HostStrip.module.css';
 
 export default function HostStrip() {
@@ -6,10 +5,9 @@ export default function HostStrip() {
     <section className={styles.hostStrip}>
       <div className="container">
         <div className={styles.card}>
-          {/* Portrait — headshot crop via background-image */}
+          {/* Portrait — headshot crop via CSS background-image */}
           <div
-            className={styles.portraitWrap}
-            style={{ backgroundImage: `url(${CDN.malindaCutout})` }}
+            className={styles.hostCardHeadshot}
             role="img"
             aria-label="Malinda — Host of Beyond the Listing"
           />

@@ -6,7 +6,7 @@
 
 .card {
   display: grid;
-  grid-template-columns: 220px 1fr auto;
+  grid-template-columns: 210px 1fr auto;
   gap: 36px;
   align-items: center;
   border: 1px solid var(--gold-dim);
@@ -18,16 +18,20 @@
 }
 
 /* Portrait — background-image crop for precise headshot framing */
-.portraitWrap {
-  width: 220px;
-  height: 210px;
-  flex-shrink: 0;
+.hostCardHeadshot {
+  width: 210px;
+  height: 150px;
+  flex: 0 0 210px;
   align-self: center;
   border-radius: 10px;
-  margin: 16px 0;
+  border: 1px solid rgba(201, 155, 69, 0.42);
+  background-color: #050505;
+  background-image: url("https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets/malinda-host-cutout.png");
   background-repeat: no-repeat;
-  background-size: 200%;
-  background-position: 42% 8%;
+  background-size: 310%;
+  background-position: 49% 6%;
+  overflow: hidden;
+  margin: 16px 0;
 }
 
 /* Middle copy */
@@ -94,12 +98,14 @@
     text-align: center;
   }
 
-  .portraitWrap {
-    width: 160px;
-    height: 160px;
+  .hostCardHeadshot {
+    width: 100%;
+    max-width: 280px;
+    height: 190px;
+    flex: none;
     margin: 0 auto;
-    background-size: 200%;
-    background-position: 42% 8%;
+    background-size: 280%;
+    background-position: 49% 6%;
   }
 
   .copy {
@@ -128,10 +134,10 @@
 }
 
 @media (max-width: 720px) {
-  .portraitWrap {
-    width: 130px;
-    height: 130px;
-    background-size: 200%;
-    background-position: 42% 8%;
+  .hostCardHeadshot {
+    max-width: 220px;
+    height: 160px;
+    background-size: 280%;
+    background-position: 49% 6%;
   }
 }
