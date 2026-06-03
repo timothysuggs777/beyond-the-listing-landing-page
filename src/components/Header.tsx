@@ -24,7 +24,7 @@ export default function Header() {
           <a href="#benefits" onClick={() => setMenuOpen(false)}>Why Agents Love It</a>
           <a href="#episode-format" onClick={() => setMenuOpen(false)}>Episode Format</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-          <a href="#contact" className="btn btn-gold" onClick={() => setMenuOpen(false)}>Book a Call</a>
+          <a href="https://calendar.app.google/vitHwXi78gHDxFTC7" target="_blank" rel="noopener noreferrer" className="btn btn-gold" aria-label="Book a call with Beyond the Listing Show using Google Calendar" onClick={() => setMenuOpen(false)}>Book a Call</a>
         </nav>
 
         <button

@@ -64,7 +64,7 @@ export default function TestimonialContact() {
               </div>
               <div className={styles.ctaRow}>
                 <a href="#contact" className="btn btn-gold">Request More Info</a>
-                <a href="#contact" className={styles.outlineBtn}>Book a Call</a>
+                <a href="https://calendar.app.google/vitHwXi78gHDxFTC7" target="_blank" rel="noopener noreferrer" className={styles.outlineBtn} aria-label="Book a call with Beyond the Listing Show using Google Calendar">Book a Call</a>
               </div>
             </div>
           </div>

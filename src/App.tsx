@@ -101,7 +101,7 @@ export default function App() {
             <a href="#why-agents">Why Agents Love It</a>
             <a href="#episode-format">Episode Format</a>
             <a href="#contact">Contact</a>
-            <a className="nav-button" href="#contact">Book a Call</a>
+            <a className="nav-button" href="https://calendar.app.google/vitHwXi78gHDxFTC7" target="_blank" rel="noopener noreferrer" aria-label="Book a call with Beyond the Listing Show using Google Calendar">Book a Call</a>
           </nav>
         </div>
       </header>
@@ -370,8 +370,7 @@ export default function App() {
               </div>
               <div className="button-row">
                 <a className="btn btn-gold" href="#contact">Request More Info</a>
-                {/* TODO: Replace #top with the production booking URL when available. */}
-                <a className="btn btn-dark" href="#top">Book a Call</a>
+                <a className="btn btn-dark" href="https://calendar.app.google/vitHwXi78gHDxFTC7" target="_blank" rel="noopener noreferrer" aria-label="Book a call with Beyond the Listing Show using Google Calendar" onClick={() => { if (typeof window !== 'undefined' && (window as any).gtag) (window as any).gtag('event', 'book_a_call_click', { event_category: 'CTA', event_label: 'testimonial_section' }); }}>Book a Call</a>
               </div>
             </div>
 
