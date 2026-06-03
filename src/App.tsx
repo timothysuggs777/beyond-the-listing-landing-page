@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from './lib/supabase';
 import heroThumb from '../public/assets/hero-episode-preview-virginia copy.png';
+import malindaPortrait from '../public/malinda-host-portrait.png';
 
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
 const LOGO = `${CDN}/beyond_the_listing_logo_design.png?v=6`;
@@ -156,7 +157,7 @@ export default function App() {
           <div className="site-shell">
             <div className="host-card">
               <div className="host-image">
-                <img src="/malinda-host-portrait.png" alt="Malinda, host of Beyond the Listing" />
+                <img src={malindaPortrait} alt="Malinda, host of Beyond the Listing" />
               </div>
               <div className="host-copy">
                 <p className="eyebrow">Meet your host</p>
