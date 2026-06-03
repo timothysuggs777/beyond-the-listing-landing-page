@@ -14,35 +14,77 @@ interface FormState {
   brokerage: string;
   property: string;
   message: string;
+  companyWebsite: string; // honeypot
 }
 
-const emptyForm: FormState = { name: '', email: '', phone: '', brokerage: '', property: '', message: '' };
+const emptyForm: FormState = { name: '', email: '', phone: '', brokerage: '', property: '', message: '', companyWebsite: '' };
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EDGE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
 
 export default function App() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [validationError, setValidationError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    if (validationError) setValidationError('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email) return;
+    if (status === 'submitting') return;
+
+    const { name, email, phone, brokerage } = form;
+    if (!name.trim() || !email.trim() || !phone.trim() || !brokerage.trim()) {
+      setValidationError('Please fill in your name, email, phone, and brokerage.');
+      return;
+    }
+    if (!EMAIL_RE.test(email.trim())) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+
+    setValidationError('');
     setStatus('submitting');
-    const { error } = await supabase.from('contact_submissions').insert([{
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      brokerage: form.brokerage,
-      property_address: form.property,
-      message: form.message,
-    }]);
-    if (error) {
+
+    try {
+      // Also persist to Supabase for record-keeping
+      supabase.from('contact_submissions').insert([{
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        brokerage: form.brokerage.trim(),
+        property_address: form.property.trim(),
+        message: form.message.trim(),
+      }]).then(() => {});
+
+      const res = await fetch(EDGE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          brokerage: form.brokerage.trim(),
+          property: form.property.trim(),
+          message: form.message.trim(),
+          companyWebsite: form.companyWebsite, // honeypot
+        }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setForm(emptyForm);
+      } else {
+        setStatus('error');
+      }
+    } catch {
       setStatus('error');
-    } else {
-      setStatus('success');
-      setForm(emptyForm);
     }
   };
 
@@ -305,22 +347,37 @@ export default function App() {
             {status === 'success' ? (
               <div className="contact-form" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, textAlign: 'center' }}>
                 <p style={{ color: 'var(--gold-2)', fontSize: 18, fontWeight: 700, margin: 0 }}>Request Received!</p>
-                <p style={{ color: 'rgba(255,255,255,.7)', fontSize: 14, margin: 0 }}>We&rsquo;ll be in touch shortly.</p>
+                <p style={{ color: 'rgba(255,255,255,.7)', fontSize: 14, margin: 0 }}>Thanks — we received your request and will be in touch soon.</p>
                 <button className="btn btn-gold btn-full" onClick={() => setStatus('idle')}>Submit Another</button>
               </div>
             ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                {/* Honeypot — hidden from real users */}
+                <input
+                  type="text"
+                  name="companyWebsite"
+                  value={form.companyWebsite}
+                  onChange={handleChange}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
                 <div className="form-grid">
-                  <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-                  <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-                  <input type="tel" name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
-                  <input type="text" name="brokerage" placeholder="Brokerage" value={form.brokerage} onChange={handleChange} />
+                  <input type="text" name="name" placeholder="Name *" value={form.name} onChange={handleChange} />
+                  <input type="email" name="email" placeholder="Email *" value={form.email} onChange={handleChange} />
+                  <input type="tel" name="phone" placeholder="Phone *" value={form.phone} onChange={handleChange} />
+                  <input type="text" name="brokerage" placeholder="Brokerage *" value={form.brokerage} onChange={handleChange} />
                   <input className="full" type="text" name="property" placeholder="Property Address (or Area)" value={form.property} onChange={handleChange} />
                   <textarea className="full" name="message" placeholder="Tell us about the property" value={form.message} onChange={handleChange} />
                 </div>
+                {validationError && (
+                  <p style={{ color: '#e88b8b', fontSize: 13, textAlign: 'center', margin: '10px 0 0' }}>
+                    {validationError}
+                  </p>
+                )}
                 {status === 'error' && (
-                  <p style={{ color: '#e88b8b', fontSize: 13, textAlign: 'center', margin: '8px 0 0' }}>
-                    Something went wrong. Please try again.
+                  <p style={{ color: '#e88b8b', fontSize: 13, textAlign: 'center', margin: '10px 0 0' }}>
+                    Something went wrong sending your request. Please try again or email <strong>casting@beyondthelistingshow.com</strong> directly.
                   </p>
                 )}
                 <button className="btn btn-gold btn-full" type="submit" disabled={status === 'submitting'}>

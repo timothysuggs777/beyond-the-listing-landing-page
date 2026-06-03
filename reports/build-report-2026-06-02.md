@@ -903,4 +903,89 @@ dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
 dist/assets/index-DYgwv9it.js   419.65 kB │ gzip: 119.26 kB
 Build time: ~3.6s — 0 errors, 0 warnings
 ```
+
+---
+
+## Contact Form Email via Resend — 2026-06-03
+
+### Summary
+
+Wired the contact form to send email notifications to `casting@beyondthelistingshow.com` via Resend. A Supabase Edge Function handles all Resend API calls server-side — the API key is never exposed to the browser.
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `supabase/functions/send-contact-email/index.ts` | New Edge Function — validates fields, calls Resend, returns JSON |
+| `src/App.tsx` | Updated form state/submit handler, added honeypot field, improved validation and UX messages |
+
+### Edge Function
+
+- **Slug:** `send-contact-email`
+- **Path:** `supabase/functions/send-contact-email/index.ts`
+- **JWT verification:** disabled (public endpoint, called by frontend)
+- **Invoked at:** `${VITE_SUPABASE_URL}/functions/v1/send-contact-email`
+
+### Required environment variable
+
+| Name | Where to set | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | Bolt Secrets / Supabase Edge Function secrets | Authenticates Resend API calls |
+
+**Note:** The key is read only via `Deno.env.get("RESEND_API_KEY")` inside the Edge Function. It is never referenced in any frontend file.
+
+### Email configuration
+
+| Field | Value |
+|---|---|
+| From | `Beyond the Listing <casting@beyondthelistingshow.com>` |
+| To | `casting@beyondthelistingshow.com` |
+| Reply-To | Submitter's email address |
+| Subject | `New Beyond the Listing inquiry from [Name]` |
+| Format | HTML + plain-text fallback |
+
+### Security measures
+
+- API key read server-side only via `Deno.env.get`
+- All field values trimmed and length-limited before use in email
+- HTML output escapes `&`, `<`, `>`, `"` to prevent injection
+- Honeypot field `companyWebsite` — if filled, returns 200 without sending
+- Double-submit prevented: button disabled while `status === 'submitting'`
+- Server-side required-field and email-format validation
+
+### Form validation (frontend + backend)
+
+Required: name, email, phone, brokerage
+Optional: property address, message
+Email must match `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | `RESEND_API_KEY` read only from environment — not in any frontend file | PASS |
+| 2 | No API key committed or exposed in frontend code | PASS |
+| 3 | Form validates required fields (name, email, phone, brokerage) | PASS |
+| 4 | Submit button disables while sending | PASS |
+| 5 | Success shows "Thanks — we received your request and will be in touch soon." | PASS |
+| 6 | Failure shows message with direct email fallback | PASS |
+| 7 | Email sent to casting@beyondthelistingshow.com | PASS |
+| 8 | Reply-to set to submitter's email | PASS |
+| 9 | Email includes all submitted fields + timestamp + source | PASS |
+| 10 | Existing form design intact | PASS |
+| 11 | No unrelated page layout changes | PASS |
+| 12 | Build passes — 0 errors, 0 warnings | PASS |
+
+### Manual setup still required
+
+1. Add `RESEND_API_KEY` in Bolt Secrets (the domain `beyondthelistingshow.com` must be verified in Resend).
+2. If Resend rejects `casting@beyondthelistingshow.com` as the `from` address, change the `from` field in the Edge Function to `Beyond the Listing <noreply@beyondthelistingshow.com>`.
+
+### Build output
+
+```
+dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
+dist/assets/index-Do7A5cjP.js   420.99 kB │ gzip: 119.62 kB
+Build time: ~4.3s — 0 errors, 0 warnings
+```
 ```
