@@ -6,7 +6,7 @@ const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-land
 const LOGO = `${CDN}/beyond_the_listing_logo_design.png?v=6`;
 const HERO_THUMB = heroThumb;
 const CONTACT_PORTRAIT = `${CDN}/contact-section-malinda-warm-portrait.png?v=5`;
-const HOST_PORTRAIT = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/public/assets/malinda-host-portrait-white.png';
+const HOST_PORTRAIT = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets/host-card-malinda-white-headshot.png?v=2';
 
 interface FormState {
   name: string;
