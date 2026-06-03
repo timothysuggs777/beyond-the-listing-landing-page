@@ -6,14 +6,13 @@ export default function HostStrip() {
     <section className={styles.hostStrip}>
       <div className="container">
         <div className={styles.card}>
-          {/* Portrait — bleeds slightly */}
-          <div className={styles.portraitWrap}>
-            <img
-              src={CDN.malindaCutout}
-              alt="Malinda — Host of Beyond the Listing"
-              className={styles.portrait}
-            />
-          </div>
+          {/* Portrait — headshot crop via background-image */}
+          <div
+            className={styles.portraitWrap}
+            style={{ backgroundImage: `url(${CDN.malindaCutout})` }}
+            role="img"
+            aria-label="Malinda — Host of Beyond the Listing"
+          />
 
           {/* Middle copy */}
           <div className={styles.copy}>
