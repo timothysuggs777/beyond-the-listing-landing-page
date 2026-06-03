@@ -32,7 +32,7 @@ a { color: inherit; text-decoration: none; }
 .nav-button { padding: 15px 28px; background: var(--gold); color: #16100a; border-radius: 10px; font-weight: 700; }
 .hero { position: relative; min-height: 690px; overflow: hidden; isolation: isolate; }
 .hero-bg { position: absolute; inset: 0; background: radial-gradient(circle at 68% 15%, rgba(201,155,69,.22), transparent 34%), radial-gradient(circle at 25% 82%, rgba(201,155,69,.12), transparent 38%), linear-gradient(112deg, #050505 0%, #0a0c0d 44%, #101a1a 72%, #050505 100%); z-index: -3; }
-.hero-bg::after { content: ""; position: absolute; inset: 0; background-image: url("https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets/malinda-hero.png?v=1"); background-size: cover; background-position: center top; opacity: .68; mix-blend-mode: screen; filter: saturate(.9) brightness(.9); }
+.hero-bg::after { content: ""; position: absolute; inset: 0; background-image: url("/assets/hero-atmosphere.png"); background-size: cover; background-position: center top; opacity: .68; mix-blend-mode: screen; filter: saturate(.9) brightness(.9); }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.72) 38%, rgba(0,0,0,.35) 68%, rgba(0,0,0,.75) 100%), linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.80)); z-index: -1; }
 .hero-grid { min-height: 650px; display: grid; grid-template-columns: minmax(0, .92fr) minmax(420px, .95fr); align-items: center; gap: 68px; padding: 42px 0 58px; }
 .eyebrow { margin: 0 0 17px; color: var(--gold-2); text-transform: uppercase; letter-spacing: .28em; font-size: 11px; font-weight: 800; }
