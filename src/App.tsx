@@ -156,7 +156,7 @@ export default function App() {
           <div className="site-shell">
             <div className="host-card">
               <div className="host-image">
-                <img src="/assets/malinda-host-portrait.png" alt="Malinda, host of Beyond the Listing" />
+                <img src="/malinda-host-portrait.png" alt="Malinda, host of Beyond the Listing" />
               </div>
               <div className="host-copy">
                 <p className="eyebrow">Meet your host</p>
