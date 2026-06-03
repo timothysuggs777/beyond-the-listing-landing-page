@@ -122,16 +122,14 @@
 
 .portraitFrame {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .portraitFrame img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: 40% center;
+  display: none;
 }
 
 /* Form column */
