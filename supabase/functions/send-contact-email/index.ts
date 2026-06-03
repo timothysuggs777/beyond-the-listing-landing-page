@@ -100,8 +100,9 @@ Deno.serve(async (req: Request) => {
 
   try {
     const apiKey = Deno.env.get("RESEND_API_KEY");
-    if (!apiKey) {
-      console.error("RESEND_API_KEY is not set");
+    const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
+    if (!apiKey || !fromEmail) {
+      console.error("Missing required secrets:", { RESEND_API_KEY: !!apiKey, RESEND_FROM_EMAIL: !!fromEmail });
       return new Response(
         JSON.stringify({ error: "Email service not configured." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -151,7 +152,7 @@ Deno.serve(async (req: Request) => {
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-      from: "Beyond the Listing <casting@beyondthelistingshow.com>",
+      from: fromEmail,
       to: ["casting@beyondthelistingshow.com"],
       replyTo: email,
       subject: `New Beyond the Listing inquiry from ${name}`,

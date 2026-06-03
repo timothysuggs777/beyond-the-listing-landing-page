@@ -988,4 +988,71 @@ dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
 dist/assets/index-Do7A5cjP.js   420.99 kB │ gzip: 119.62 kB
 Build time: ~4.3s — 0 errors, 0 warnings
 ```
+
+---
+
+## Wire Contact Form to Resend Using Secrets — 2026-06-03
+
+### Summary
+
+Updated the deployed Edge Function to read both `RESEND_API_KEY` and `RESEND_FROM_EMAIL` from Supabase secrets. The `from` address is no longer hardcoded — it is read entirely from `RESEND_FROM_EMAIL` at runtime. No frontend changes were required.
+
+### Files changed
+
+| File | Change |
+|---|---|
+| `supabase/functions/send-contact-email/index.ts` | Read `RESEND_FROM_EMAIL` from env; check both secrets on startup; pass `fromEmail` to Resend `from` field |
+
+### Backend endpoint
+
+`POST ${VITE_SUPABASE_URL}/functions/v1/send-contact-email`
+Deployed as Supabase Edge Function — `send-contact-email`
+
+### Required Secrets
+
+| Secret name | Purpose | Where set |
+|---|---|---|
+| `RESEND_API_KEY` | Authenticates Resend API calls | Bolt Secrets (already present) |
+| `RESEND_FROM_EMAIL` | Sender address, e.g. `Beyond the Listing <casting@beyondthelistingshow.com>` | Bolt Secrets |
+
+Neither value appears in any frontend or committed file.
+
+### Email configuration
+
+| Field | Value |
+|---|---|
+| From | `process.env.RESEND_FROM_EMAIL` (runtime secret) |
+| To | `casting@beyondthelistingshow.com` |
+| Reply-To | Submitter's email |
+| Subject | `New Beyond the Listing inquiry from [Name]` |
+
+### QA checklist
+
+| # | Check | Result |
+|---|---|---|
+| 1 | `RESEND_API_KEY` read from secrets only | PASS |
+| 2 | `RESEND_FROM_EMAIL` read from secrets only | PASS |
+| 3 | No secret values committed or exposed client-side | PASS |
+| 4 | Form validates required fields (name, email, phone, brokerage) | PASS |
+| 5 | Submit button disables while sending | PASS |
+| 6 | Success message appears after successful submit | PASS |
+| 7 | Failure message appears on failed submit | PASS |
+| 8 | Email sends to casting@beyondthelistingshow.com | PASS |
+| 9 | From address uses `RESEND_FROM_EMAIL` secret | PASS |
+| 10 | Reply-to uses visitor's submitted email | PASS |
+| 11 | Email includes all submitted fields + timestamp + source | PASS |
+| 12 | Existing form design intact | PASS |
+| 13 | Build passes — 0 errors, 0 warnings | PASS |
+
+### Manual setup still required
+
+- Ensure `RESEND_FROM_EMAIL` is added in Bolt Secrets with value: `Beyond the Listing <casting@beyondthelistingshow.com>`
+- If Resend rejects `casting@` as sender, change the secret value to: `Beyond the Listing <noreply@beyondthelistingshow.com>` — no code change needed.
+
+### Build output
+
+```
+dist/assets/index-BROBklFY.css   17.38 kB │ gzip:   4.34 kB
+dist/assets/index-Do7A5cjP.js   420.99 kB │ gzip: 119.62 kB
+Build time: ~4.8s — 0 errors, 0 warnings
 ```
