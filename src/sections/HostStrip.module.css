@@ -8,32 +8,34 @@
   display: grid;
   grid-template-columns: 220px 1fr auto;
   gap: 36px;
-  align-items: end;
+  align-items: center;
   border: 1px solid var(--gold-dim);
   border-radius: var(--radius);
   background: linear-gradient(135deg, #161410 0%, #0c0b09 100%);
-  padding: 0 36px 0 0;
-  overflow: visible;
+  padding: 0 36px 0 20px;
+  overflow: hidden;
   position: relative;
 }
 
 /* Portrait bleeds above and below the card */
 .portraitWrap {
   width: 220px;
+  height: 200px;
   flex-shrink: 0;
-  align-self: flex-end;
-  margin-top: -40px;
+  align-self: center;
   overflow: hidden;
+  border-radius: 10px;
+  margin: 16px 0 16px 0;
 }
 
 .portrait {
   width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
-  object-position: 50% 8%;
-  height: 260px;
-  transform: scale(1.6);
-  transform-origin: 50% 15%;
+  object-position: center 22%;
+  transform: scale(1.45);
+  transform-origin: center 22%;
 }
 
 /* Middle copy */
@@ -96,17 +98,18 @@
 @media (max-width: 1060px) {
   .card {
     grid-template-columns: 1fr;
-    padding: 0 24px 28px;
+    padding: 24px 24px 28px;
     text-align: center;
   }
 
   .portraitWrap {
     width: 160px;
-    margin: -32px auto 0;
+    height: 160px;
+    margin: 0 auto;
   }
 
   .copy {
-    padding: 16px 0 0;
+    padding: 0;
   }
 
   .copy p {
@@ -133,5 +136,6 @@
 @media (max-width: 720px) {
   .portraitWrap {
     width: 130px;
+    height: 130px;
   }
 }
