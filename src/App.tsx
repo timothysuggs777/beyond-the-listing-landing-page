@@ -93,8 +93,8 @@ export default function App() {
       {/* ── HEADER ── */}
       <header className="site-header">
         <div className="site-shell header-inner">
-          <a className="logo-link" href="#top" aria-label="Beyond the Listing home">
-            <img src={LOGO} alt="Beyond the Listing" />
+          <a className="logo-link" href="#top" aria-label="Beyond the Listing Show — home">
+            <img src={LOGO} alt="Beyond the Listing Show logo" width="184" height="45" fetchPriority="high" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How It Works</a>
@@ -145,7 +145,7 @@ export default function App() {
 
             <article className="episode-card">
               <div className="episode-media">
-                <img src={HERO_THUMB} alt="Episode preview — Inside a Timeless Estate in Virginia" />
+                <img src={HERO_THUMB} alt="Episode preview — Inside a Timeless Estate in Virginia" fetchPriority="high" />
               </div>
             </article>
           </div>
@@ -156,7 +156,7 @@ export default function App() {
           <div className="site-shell">
             <div className="host-card">
               <div className="host-image">
-                <img src={HOST_PORTRAIT} alt="Malinda, host of Beyond the Listing" />
+                <img src={HOST_PORTRAIT} alt="Malinda, host of Beyond the Listing Show" loading="lazy" />
               </div>
               <div className="host-copy">
                 <p className="eyebrow">Meet your host</p>
@@ -200,7 +200,7 @@ export default function App() {
               </p>
             </div>
             <div className="show-video media-frame">
-              <img src={`${CDN}/about-show-malinda-courtyard.png`} alt="Malinda hosting the show" />
+              <img src={`${CDN}/about-show-malinda-courtyard.png`} alt="Malinda hosting a Beyond the Listing Show episode on location" loading="lazy" />
               <button className="big-play light" type="button">▶</button>
             </div>
             <aside id="episode-format" className="format-card">
@@ -256,30 +256,30 @@ export default function App() {
               <article className="deliverable">
                 <h3>Full YouTube Episode</h3>
                 <div className="deliverable-media wide">
-                  <img src={`${CDN}/deliverable-full-episode-virginia.png`} alt="Full YouTube episode thumbnail" />
+                  <img src={`${CDN}/deliverable-full-episode-virginia.png`} alt="Full YouTube episode thumbnail — Beyond the Listing Show real estate video" loading="lazy" />
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Social Clips &amp; Reels</h3>
                 <div className="reel-grid">
                   <div className="deliverable-media phone">
-                    <img src={`${CDN}/deliverable-reel-1-virginia.png`} alt="Social reel thumbnail one" />
+                    <img src={`${CDN}/deliverable-reel-1-virginia.png`} alt="Social media reel for real estate listing — Beyond the Listing Show" loading="lazy" />
                   </div>
                   <div className="deliverable-media phone">
-                    <img src={`${CDN}/deliverable-reel-2-virginia.png`} alt="Social reel thumbnail two" />
+                    <img src={`${CDN}/deliverable-reel-2-virginia.png`} alt="Instagram reel for real estate agent branding — Beyond the Listing Show" loading="lazy" />
                   </div>
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Drone &amp; B-Roll Footage</h3>
                 <div className="deliverable-media wide">
-                  <img src={`${CDN}/deliverable-drone-broll-virginia.png`} alt="Drone footage thumbnail" />
+                  <img src={`${CDN}/deliverable-drone-broll-virginia.png`} alt="Drone and B-roll footage of listing — real estate video production" loading="lazy" />
                 </div>
               </article>
               <article className="deliverable">
                 <h3>Branded CTA &amp; Contact Assets</h3>
                 <div className="deliverable-media cta">
-                  <img src={`${CDN}/deliverable-branded-cta-virginia.png`} alt="Branded call-to-action asset" />
+                  <img src={`${CDN}/deliverable-branded-cta-virginia.png`} alt="Branded call-to-action card for real estate agent marketing" loading="lazy" />
                 </div>
               </article>
             </div>
@@ -315,6 +315,40 @@ export default function App() {
               <div><span>♢</span><p>Luxury &amp; Exclusive Homes</p></div>
               <div><span>♧</span><p>Teams &amp; Agent Marketing Programs</p></div>
             </div>
+            <p className="market-note">Currently serving agents in <strong>Central and Northern Virginia</strong> and <strong>Greater Atlanta, Georgia</strong>.</p>
+          </div>
+        </section>
+
+        {/* ── FAQ ── */}
+        <section className="faq-section section-cream" aria-labelledby="faq-heading">
+          <div className="site-shell">
+            <h2 id="faq-heading" className="section-title">Common Questions</h2>
+            <dl className="faq-list">
+              <div className="faq-item">
+                <dt>What is Beyond the Listing Show?</dt>
+                <dd>Beyond the Listing Show is a hosted YouTube series and real estate media service that turns exceptional listings and agent stories into cinematic content — episodes, reels, drone footage, and branded marketing assets, all from one production.</dd>
+              </div>
+              <div className="faq-item">
+                <dt>Who is this for?</dt>
+                <dd>It's built for top-producing agents, boutique brokerages, luxury listing specialists, and real estate teams who want to stand out with premium video marketing and win listings before the competition.</dd>
+              </div>
+              <div className="faq-item">
+                <dt>What markets does Beyond the Listing Show serve?</dt>
+                <dd>We currently work with agents and brokerages in <strong>Central and Northern Virginia</strong> and <strong>Greater Atlanta, Georgia</strong>.</dd>
+              </div>
+              <div className="faq-item">
+                <dt>What does an agent receive from one production?</dt>
+                <dd>A full YouTube episode, social media clips and reels, drone and B-roll footage, and branded call-to-action assets — everything needed to fuel weeks of outreach, social media, and listing presentations.</dd>
+              </div>
+              <div className="faq-item">
+                <dt>Can this support listing presentations and social media?</dt>
+                <dd>Yes. The complete content package is designed to power listing presentations, agent social channels, email marketing, and YouTube — turning a single shoot into a lasting content library.</dd>
+              </div>
+              <div className="faq-item">
+                <dt>How do I request more information or book a call?</dt>
+                <dd>Use the contact form below or email <a href="mailto:casting@beyondthelistingshow.com">casting@beyondthelistingshow.com</a> to request more information or schedule a conversation.</dd>
+              </div>
+            </dl>
           </div>
         </section>
 
@@ -341,7 +375,7 @@ export default function App() {
             </div>
 
             <div className="bottom-portrait">
-              <img src={CONTACT_PORTRAIT} alt="Malinda — Beyond the Listing host" />
+              <img src={CONTACT_PORTRAIT} alt="Malinda, host of Beyond the Listing Show" loading="lazy" />
             </div>
 
             {status === 'success' ? (
@@ -393,7 +427,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <img src={LOGO} alt="Beyond the Listing" />
+          <img src={LOGO} alt="Beyond the Listing Show logo" />
           <p>A hosted home-story show for standout properties.</p>
           <nav>
             <a href="#how-it-works">How It Works</a>

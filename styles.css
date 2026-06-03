@@ -163,3 +163,18 @@ textarea { min-height: 132px; padding-top: 16px; resize: vertical; }
   .footer-inner { text-align: center; justify-items: center; }
   .footer-inner nav { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ── FAQ SECTION ── */
+.faq-section { padding: 72px 0; }
+.faq-list { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none; }
+.faq-item { border-bottom: 1px solid rgba(0,0,0,.1); padding: 28px 0; }
+.faq-item:first-child { border-top: 1px solid rgba(0,0,0,.1); }
+.faq-item dt { font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700; color: var(--dark); margin: 0 0 10px; }
+.faq-item dd { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; color: rgba(15,14,12,.72); margin: 0; }
+.faq-item dd a { color: var(--gold-2, #b88a2f); text-decoration: none; }
+.faq-item dd a:hover { text-decoration: underline; }
+
+/* Market note */
+.market-note { margin-top: 28px; font-size: 14px; color: rgba(15,14,12,.6); text-align: center; }
+.market-note strong { color: var(--dark); }
+
