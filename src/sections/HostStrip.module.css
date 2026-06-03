@@ -30,8 +30,10 @@
   width: 100%;
   display: block;
   object-fit: cover;
-  object-position: top center;
+  object-position: 50% 8%;
   height: 260px;
+  transform: scale(1.6);
+  transform-origin: 50% 15%;
 }
 
 /* Middle copy */
