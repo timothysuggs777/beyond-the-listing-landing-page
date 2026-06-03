@@ -6,7 +6,7 @@
 
 .card {
   display: grid;
-  grid-template-columns: 180px 1fr auto;
+  grid-template-columns: 220px 1fr auto;
   gap: 36px;
   align-items: end;
   border: 1px solid var(--gold-dim);
@@ -19,18 +19,19 @@
 
 /* Portrait bleeds above and below the card */
 .portraitWrap {
-  width: 180px;
+  width: 220px;
   flex-shrink: 0;
   align-self: flex-end;
-  /* bleed upward by pulling top up */
   margin-top: -40px;
+  overflow: hidden;
 }
 
 .portrait {
   width: 100%;
   display: block;
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: cover;
+  object-position: top center;
+  height: 260px;
 }
 
 /* Middle copy */
