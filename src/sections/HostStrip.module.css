@@ -17,7 +17,7 @@
   position: relative;
 }
 
-/* Portrait — background-image crop for precise headshot framing */
+/* Portrait — pre-cropped headshot image */
 .hostCardHeadshot {
   width: 210px;
   height: 150px;
@@ -26,10 +26,10 @@
   border-radius: 10px;
   border: 1px solid rgba(201, 155, 69, 0.42);
   background-color: #050505;
-  background-image: url("https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets/malinda-host-cutout.png");
+  background-image: url("https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets/host-card-malinda-white-headshot.png?v=1");
   background-repeat: no-repeat;
-  background-size: 310%;
-  background-position: 49% 6%;
+  background-size: cover;
+  background-position: center center;
   overflow: hidden;
   margin: 16px 0;
 }
@@ -104,8 +104,8 @@
     height: 190px;
     flex: none;
     margin: 0 auto;
-    background-size: 280%;
-    background-position: 49% 6%;
+    background-size: cover;
+    background-position: center center;
   }
 
   .copy {
@@ -137,7 +137,7 @@
   .hostCardHeadshot {
     max-width: 220px;
     height: 160px;
-    background-size: 280%;
-    background-position: 49% 6%;
+    background-size: cover;
+    background-position: center center;
   }
 }
