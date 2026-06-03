@@ -4,7 +4,7 @@ import { supabase } from './lib/supabase';
 const CDN = 'https://cdn.jsdelivr.net/gh/timothysuggs777/beyond-the-listing-landing-page@main/assets';
 const LOGO = `${CDN}/beyond_the_listing_logo_design.png?v=6`;
 const HERO_THUMB = `${CDN}/malinda-hero.png?v=1`;
-const CONTACT_PORTRAIT = `${CDN}/host-card-malinda-white-headshot.png?v=2`;
+const CONTACT_PORTRAIT = `${CDN}/malinda-contact.png?v=20260603-contact`;
 const HOST_PORTRAIT = `${CDN}/contact-section-malinda-warm-portrait.png?v=5`;
 
 interface FormState {
