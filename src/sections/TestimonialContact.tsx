@@ -73,7 +73,7 @@ export default function TestimonialContact() {
           <div className={styles.portraitCol}>
             <div className={styles.portraitFrame}>
               <img
-                src={CDN.malindaPortrait}
+                src="/assets/malinda-host-portrait.png"
                 alt="Malinda — Beyond the Listing host"
               />
             </div>
