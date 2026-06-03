@@ -71,12 +71,12 @@ export default function TestimonialContact() {
 
           {/* Center: Malinda portrait */}
           <div className={styles.portraitCol}>
-            <div
-              className={styles.portraitFrame}
-              style={{ backgroundImage: `url(${CDN.malindaPortrait})` }}
-              role="img"
-              aria-label="Malinda — Beyond the Listing host"
-            />
+            <div className={styles.portraitFrame}>
+              <img
+                src={CDN.malindaPortrait}
+                alt="Malinda — Beyond the Listing host"
+              />
+            </div>
           </div>
 
           {/* Right: contact form */}
