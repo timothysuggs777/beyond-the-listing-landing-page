@@ -370,6 +370,7 @@ export default function App() {
               </div>
               <div className="button-row">
                 <a className="btn btn-gold" href="#contact">Request More Info</a>
+                {/* TODO: Replace #top with the production booking URL when available. */}
                 <a className="btn btn-dark" href="#top">Book a Call</a>
               </div>
             </div>
